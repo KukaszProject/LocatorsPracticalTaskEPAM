@@ -117,12 +117,7 @@ namespace LocatorsPracticalTask.Pages
             var cookieButton = _wait.Until(ExpectedConditions.ElementToBeClickable(AcceptCookiesBtn));
             if (cookieButton.Displayed && cookieButton.Enabled)
             {
-                // Scroll into view in case it's off-screen or overlapped
-                //((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].scrollIntoView(true);", cookieButton);
-                // Small delay for any animation
-                //System.Threading.Thread.Sleep(300);
-                // Click using JavaScript to avoid intercept issues
-                //((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", cookieButton);
+                Thread.Sleep(300);
                 cookieButton.Click();
             }
         }

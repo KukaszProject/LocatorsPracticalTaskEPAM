@@ -68,7 +68,7 @@ public class TestCases
         _driver.Quit();
     }
 
-    [TestCase("Python")]
+    [TestCase(".NET")]
     [TestCase("JavaScript")]
     public void TestCase1_ValidateJobSearch(string keyword)
     {

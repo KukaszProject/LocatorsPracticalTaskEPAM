@@ -97,8 +97,8 @@ namespace LocatorsPracticalTask.Pages
            By.XPath("//button[contains(text(),'Find')]/ancestor::form"));
         //private IWebElement LastJob => _driver.FindElement(By.XPath("//ul[@class='search-result__list']//li[position()=last()]"));
 
-        //        private IWebElement SortByDateButton => wait.Until(d =>
-        //            d.FindElement(By.CssSelector(".search-result__sorting-label")));
+        private IWebElement SortByDateButton => _wait.Until(d =>
+            d.FindElement(By.CssSelector(".search-result__sorting-label")));
 
         private IWebElement LatestJobResult => _wait.Until(d =>
             d.FindElement(By.PartialLinkText("APPLY")));
@@ -132,6 +132,7 @@ namespace LocatorsPracticalTask.Pages
 
         public void OpenLastJob()
         {
+            SortByDateButton.Click();
             _wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
         }
     }
