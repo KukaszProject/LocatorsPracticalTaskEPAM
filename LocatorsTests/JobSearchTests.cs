@@ -122,58 +122,46 @@
 ////}
 
 
-//using LocatorsPracticalTask.Drivers;
-//using LocatorsPracticalTask.Pages;
-//using NUnit.Framework;
-//using OpenQA.Selenium;
+using LocatorsPracticalTask.Drivers;
+using LocatorsPracticalTask.Pages;
+using NUnit.Framework;
+using OpenQA.Selenium;
 
-//namespace AutomationFramework.Tests
-//{
-//    public class JobSearchTests
-//    {
-//        private IWebDriver _driver;
-//        private HomePage _homePage;
-//        private CareersPage _careersPage;
-//        private JobDetailsPage _jobDetailsPage;
-//        private GlobalSearchPage _globalSearchPage;
+namespace LocatorsPracticalTask.Tests
+{
+    public class JobSearchTests
+    {
+        private IWebDriver? driver;
 
-//        [SetUp]
-//        public void SetUp()
-//        {
-//            _driver = DriverFactory.GetDriver();
-//            _driver.Navigate().GoToUrl("https://www.epam.com/");
-//            _homePage = new HomePage(_driver);
-//            _careersPage = new CareersPage(_driver);
-//            _jobDetailsPage = new JobDetailsPage(_driver);
-//            _globalSearchPage = new GlobalSearchPage(_driver);
-//            _homePage.AcceptCookies();
-//        }
+        [SetUp]
+        public void Setup()
+        {
+            driver = DriverFactory.GetDriver();
+            driver.Navigate().GoToUrl("https://www.epam.com/");
+        }
 
-//        [Test]
-//        public void TestCase1_SearchAndApply()
-//        {
-//            string keyword = "Java";
-//            _homePage.GoToCareers();
-//            _careersPage.SearchJob(keyword);
-//            _careersPage.OpenLatestJob();
-//            Assert.IsTrue(_jobDetailsPage.ContainsKeyword(keyword));
-//        }
+        [TestCase(".NET")]
+        [TestCase("JavaScript")]
+        public void ValidateJobSearch(string keyword)
+        {
+            var home = new HomePage(driver);
+            home.AcceptCookies();
+            home.GoToCareers();
 
-//        [TestCase("Blockchain")]
-//        [TestCase("Cloud")]
-//        [TestCase("Automation")]
-//        public void TestCase2_GlobalSearch(string keyword)
-//        {
-//            _homePage.OpenSearch();
-//            _globalSearchPage.PerformSearch(keyword);
-//            Assert.IsTrue(_globalSearchPage.AreResultsRelevant(keyword));
-//        }
+            var careers = new CareersPage(driver);
+            careers.SearchJobs(keyword);
+            careers.SortByDate();
+            careers.OpenLastJob();
 
-//        [TearDown]
-//        public void TearDown()
-//        {
-//            _driver.Quit();
-//            _driver.Dispose();
-//        }
-//    }
-//}
+            var job = new JobDetailsPage(driver);
+            Assert.IsTrue(job.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            driver?.Quit();
+            driver?.Dispose();
+        }
+    }
+}
