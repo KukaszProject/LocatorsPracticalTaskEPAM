@@ -89,16 +89,19 @@ namespace LocatorsPracticalTask.Pages
             _wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
+        private IWebElement FormElement => _driver.FindElement(By.Id("jobSearchFilterForm"));
         private IWebElement KeywordInput => _driver.FindElement(By.Id("new_form_job_search-keyword"));
         private IWebElement LocationDropdown => _driver.FindElement(
             By.ClassName("select2-selection--single"));
         private IWebElement RemoteCheckbox => _driver.FindElement(By.ClassName("checkbox-custom-label"));
-        private IWebElement FindButton => _driver.FindElement(
-           By.XPath("//button[contains(text(),'Find')]/ancestor::form"));
-        //private IWebElement LastJob => _driver.FindElement(By.XPath("//ul[@class='search-result__list']//li[position()=last()]"));
+        private IWebElement FindButton => FormElement.FindElement(
+           By.TagName("button"));
 
-        private IWebElement SortByDateButton => _wait.Until(d =>
-            d.FindElement(By.CssSelector(".search-result__sorting-label")));
+
+        // TODO: Uncomment and implement the SortByDateButton if needed
+
+        //private IWebElement SortByDateButton => _wait.Until(d =>
+        //    d.FindElement(By.CssSelector(".search-result__sorting-label")));
 
         private IWebElement LatestJobResult => _wait.Until(d =>
             d.FindElement(By.PartialLinkText("APPLY")));
@@ -114,25 +117,22 @@ namespace LocatorsPracticalTask.Pages
         public void CheckRemote() => RemoteCheckbox.Click();
         public void SelectLocation(string location)
         {
-            // Step 1: Click the fake dropdown to expand it
             LocationDropdown.Click();
 
-            // Step 2: Wait for the dropdown options container (select2 results) to appear
-            var dropdownOptionsContainer = _wait.Until(driver =>
-                driver.FindElement(By.CssSelector("ul.select2-results__options")));
+            //var dropdownOptionsContainer = _wait.Until(driver =>
+            //    driver.FindElement(By.CssSelector("ul.select2-results__options")));
 
-            //// Step 3: Find the specific option within the dropdown
             var optionToSelect = _wait.Until(driver =>
                 driver.FindElement(By.XPath($"//li[contains(@class, 'select2-results__option') and contains(text(),'{location}')]")));
 
-            // Step 4: Click the option
-            //optionToSelect.Click();
-            dropdownOptionsContainer.SendKeys($"{location} + {Keys.Enter}");
+            optionToSelect.Click();
+            //dropdownOptionsContainer.SendKeys($"{location} + {Keys.Enter}");
         }
 
         public void OpenLastJob()
         {
-            SortByDateButton.Click();
+            // TODO: Uncomment and implement the SortByDateButton if needed
+            //SortByDateButton.Click();
             _wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
         }
     }

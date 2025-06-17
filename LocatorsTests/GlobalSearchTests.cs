@@ -53,7 +53,7 @@ using OpenQA.Selenium;
 [TestFixture]
 public class TestCases
 {
-    private IWebDriver _driver;
+    private IWebDriver? _driver;
 
     [SetUp]
     public void Setup()
@@ -65,7 +65,8 @@ public class TestCases
     [TearDown]
     public void TearDown()
     {
-        _driver.Quit();
+        _driver?.Quit();
+        _driver?.Dispose();
     }
 
     [TestCase(".NET")]
@@ -73,6 +74,7 @@ public class TestCases
     public void TestCase1_ValidateJobSearch(string keyword)
     {
         var home = new HomePage(_driver);
+        home.ConfirmHumanCheckbox();
         home.AcceptCookies();
         home.GoToCareers();
 
@@ -102,8 +104,8 @@ public class TestCases
     [TearDown]
     public void Cleanup()
     {
-        _driver.Quit();
-        _driver.Dispose();
+        _driver?.Quit();
+        _driver?.Dispose();
     }
 }
 
