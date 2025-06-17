@@ -107,19 +107,9 @@ namespace LocatorsPracticalTask.Pages
             _driver = driver;
             _wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
-
-        private IWebElement HumanCheckbox => _wait.Until(ExpectedConditions.ElementToBeClickable((By.CssSelector("label.cb-lb > input[type='checkbox']"))));
-
-
         private IWebElement AcceptCookiesBtn => _wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("onetrust-accept-btn-handler")));
         private IWebElement CareersLink => _driver.FindElement(By.LinkText("Careers"));
         private IWebElement SearchIcon => _driver.FindElement(By.ClassName("header-search__button"));
-
-        public void ConfirmHumanCheckbox()
-        {
-            Thread.Sleep(1000); // Wait for the checkbox to be visible
-            HumanCheckbox.Click();
-        }
 
         public void AcceptCookies()
         {

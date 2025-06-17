@@ -74,12 +74,12 @@ public class TestCases
     public void TestCase1_ValidateJobSearch(string keyword)
     {
         var home = new HomePage(_driver);
-        home.ConfirmHumanCheckbox();
         home.AcceptCookies();
         home.GoToCareers();
 
         var careers = new CareersPage(_driver);
         careers.SearchJobs(keyword);
+        careers.SortByDate();
         careers.OpenLastJob();
 
         var job = new JobDetailsPage(_driver);

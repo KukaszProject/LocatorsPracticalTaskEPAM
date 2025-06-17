@@ -89,51 +89,38 @@ namespace LocatorsPracticalTask.Pages
             _wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
-        private IWebElement FormElement => _driver.FindElement(By.Id("jobSearchFilterForm"));
         private IWebElement KeywordInput => _driver.FindElement(By.Id("new_form_job_search-keyword"));
-        private IWebElement LocationDropdown => _driver.FindElement(
-            By.ClassName("select2-selection--single"));
-        private IWebElement RemoteCheckbox => _driver.FindElement(By.ClassName("checkbox-custom-label"));
-        private IWebElement FindButton => FormElement.FindElement(
-           By.TagName("button"));
+        private IWebElement LocationDropdown => _driver.FindElement(By.ClassName("select2-selection--single"));
+        private IWebElement FormRemoteFilter => _driver.FindElement(By.ClassName("job-search__filter-items--remote"));
+        private IWebElement RemoteInput => _driver.FindElement(By.Name("remote"));
+        private IWebElement RemoteLabel => RemoteInput.FindElement(By.XPath("following-sibling::label"));
 
-
-        // TODO: Uncomment and implement the SortByDateButton if needed
-
-        //private IWebElement SortByDateButton => _wait.Until(d =>
-        //    d.FindElement(By.CssSelector(".search-result__sorting-label")));
-
-        private IWebElement LatestJobResult => _wait.Until(d =>
-            d.FindElement(By.PartialLinkText("APPLY")));
+        //private IWebElement RemoteCheckbox => FormRemoteFilter.FindElement(By.XPath(".//label[contains(text(), 'Remote')]"));
+        private IWebElement FindButton => _driver.FindElement(By.XPath("//form[@id='jobSearchFilterForm']//descendant::button[@type='submit']"));
+        private IWebElement SortingList => _driver.FindElement(By.ClassName("search-result__sorting-list"));
+        private IWebElement SortByDateButton => SortingList.FindElement(By.XPath(".//label[@for='sort-time']"));
+        private IWebElement LatestJobResult => _wait.Until(d => d.FindElement(By.PartialLinkText("APPLY")));
 
         public void SearchJobs(string keyword)
         {
+            CheckRemote();
             KeywordInput.SendKeys(keyword);
             SelectLocation("All Locations");
-            CheckRemote();
             FindButton.Click();
         }
 
-        public void CheckRemote() => RemoteCheckbox.Click();
+        public void CheckRemote() => RemoteLabel.Click();
         public void SelectLocation(string location)
         {
             LocationDropdown.Click();
-
-            //var dropdownOptionsContainer = _wait.Until(driver =>
-            //    driver.FindElement(By.CssSelector("ul.select2-results__options")));
-
             var optionToSelect = _wait.Until(driver =>
                 driver.FindElement(By.XPath($"//li[contains(@class, 'select2-results__option') and contains(text(),'{location}')]")));
 
             optionToSelect.Click();
-            //dropdownOptionsContainer.SendKeys($"{location} + {Keys.Enter}");
         }
 
-        public void OpenLastJob()
-        {
-            // TODO: Uncomment and implement the SortByDateButton if needed
-            //SortByDateButton.Click();
-            _wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
-        }
+        public void SortByDate() => _wait.Until(ExpectedConditions.ElementToBeClickable(SortByDateButton)).Click();
+
+        public void OpenLastJob() => _wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
     }
 }
