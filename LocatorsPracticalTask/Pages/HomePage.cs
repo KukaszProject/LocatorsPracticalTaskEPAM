@@ -16,6 +16,9 @@ namespace LocatorsPracticalTask.Pages
         }
         private IWebElement AcceptCookiesBtn => wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("onetrust-accept-btn-handler")));
         private IWebElement CareersLink => driver.FindElement(By.LinkText("Careers"));
+
+        private IWebElement AboutLink => driver.FindElement(By.LinkText("About"));
+        private IWebElement InsightsLink => driver.FindElement(By.LinkText("Insights"));
         private IWebElement SearchIcon => driver.FindElement(By.ClassName("header-search__button"));
 
         public void AcceptCookies()
@@ -28,6 +31,8 @@ namespace LocatorsPracticalTask.Pages
             }
         }
         public void GoToCareers() => CareersLink.Click();
+        public void GoToAbout() => AboutLink.Click();
+        public void GoToInsights() => InsightsLink.Click();
         public void ClickSearchIcon() => SearchIcon.Click();
     }
 }
