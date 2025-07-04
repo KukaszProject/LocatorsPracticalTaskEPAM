@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocatorsPracticalTask", "LocatorsPracticalTask\LocatorsPracticalTask.csproj", "{8950F23F-294F-435C-ACD9-BC650E33A12D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "LocatorsPracticalTask\Business.csproj", "{8950F23F-294F-435C-ACD9-BC650E33A12D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocatorsTests", "LocatorsTests\LocatorsTests.csproj", "{A694BEB5-A997-437D-9710-B15AA7D2A243}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "LocatorsTests\Tests.csproj", "{A694BEB5-A997-437D-9710-B15AA7D2A243}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{EE4180F1-1C8D-4902-949E-3527BEF4439D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A694BEB5-A997-437D-9710-B15AA7D2A243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A694BEB5-A997-437D-9710-B15AA7D2A243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A694BEB5-A997-437D-9710-B15AA7D2A243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE4180F1-1C8D-4902-949E-3527BEF4439D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4180F1-1C8D-4902-949E-3527BEF4439D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4180F1-1C8D-4902-949E-3527BEF4439D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4180F1-1C8D-4902-949E-3527BEF4439D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

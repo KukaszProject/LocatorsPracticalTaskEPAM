@@ -6,7 +6,7 @@ namespace LocatorsPracticalTask.Pages
 {
     public class HomePage
     {
-        private readonly IWebDriver driver;
+        private readonly IWebDriver driver = null!;
         private readonly WebDriverWait wait;
 
         public HomePage(IWebDriver driver)
