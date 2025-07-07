@@ -1,14 +1,11 @@
-using LocatorsPracticalTask.Core;
+using Core.Utilities;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
-
     [TestFixture]
     public class GlobalSearchTests : TestBase
     {
-
         [TestCase("BLOCKCHAIN")]
         [TestCase("Cloud")]
         [TestCase("Automation")]
@@ -19,7 +16,9 @@ namespace LocatorsPracticalTask.Tests
 
             home.AcceptCookies();
             home.ClickSearchIcon();
+
             search.Search(term);
+            search.ClickFindButton();
 
             Assert.IsTrue(search.AllResultsContain(term), $"All results should contain: {term}");
         }

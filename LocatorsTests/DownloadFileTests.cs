@@ -1,25 +1,25 @@
-﻿using LocatorsPracticalTask.Core;
+﻿using LocatorsPracticalTask.Core.Utilities;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
+using Core.Utilities;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
     public class DownloadFileTests : TestBase
     {
-        [Test]
-        public void DownloadFileTest()
+        [TestCase("EPAM_Corporate_Overview*.pdf")]
+        public void DownloadFileTest(string fileName)
         {
             var home = new HomePage(Driver);
             var about = new AboutPage(Driver);
+            var utility = new FileHelper();
 
             home.AcceptCookies();
             home.GoToAbout();
             about.DownloadButtonClicked();
 
-            Assert.True(about.WaitForFileDownload(
+            Assert.That(utility.WaitForFileDownload(
                 Path.Combine(Directory.GetCurrentDirectory(), "Downloads"),
-                "EPAM_Corporate_Overview*.pdf",
-                10), "File was not downloaded successfully.");
+                fileName, 10), "File was not downloaded successfully.", true);
         }
     }
 }

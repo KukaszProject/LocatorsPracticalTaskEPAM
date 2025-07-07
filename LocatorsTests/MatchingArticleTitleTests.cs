@@ -1,8 +1,7 @@
-﻿using LocatorsPracticalTask.Core;
+﻿using Core.Utilities;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
     public class MatchingArticleTitleTests : TestBase
     {
@@ -15,13 +14,15 @@ namespace LocatorsPracticalTask.Tests
 
             home.AcceptCookies();
             home.GoToInsights();
+
             insights.ClickOnArrow(2);
             insights.GetTitleOnCarousel();
             insights.ClickOnReadMore();
+
             article.GetCurrentArticleTitle();
 
-            Assert.IsTrue(article.IsArticleTitleMatching(insights.GetTitleOnCarousel()),
-                "The article title does not match the expected title from the carousel.");
+            Assert.That(article.IsArticleTitleMatching(insights.GetTitleOnCarousel()),
+                "The article title does not match the expected title from the carousel.", true);
         }
     }
 }

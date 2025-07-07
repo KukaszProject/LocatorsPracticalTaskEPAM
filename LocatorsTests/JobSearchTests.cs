@@ -1,12 +1,10 @@
-﻿using LocatorsPracticalTask.Core;
+﻿using Core.Utilities;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
     public class JobSearchTests : TestBase
     {
-
         [TestCase(".NET")]
         [TestCase("JavaScript")]
         public void ValidateJobSearch(string keyword)
