@@ -1,52 +1,24 @@
-﻿using LocatorsPracticalTask.Drivers;
+﻿using LocatorsPracticalTask.Core.Utilities;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Base;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
-    public class DownloadFileTests
+    public class DownloadFileTests : TestBase
     {
-        private IWebDriver? driver;
-
-        [SetUp]
-        public void Setup()
+        [TestCase("EPAM_Corporate_Overview*.pdf")]
+        public void DownloadFileTest(string fileName)
         {
-            driver = DriverFactory.GetDriver();
-            driver.Navigate().GoToUrl("https://www.epam.com/");
-        }
+            var home = new HomePage(Driver);
+            var fileHelper = new FileHelper();
 
-        [Test]
-        public void DownloadFileTest()
-        {
-            var home = new HomePage(driver);
-            var about = new AboutPage(driver);
+            home.AcceptCookies()
+                .GoToAbout()
+                .DownloadButtonClicked();
 
-            home.AcceptCookies();
-            home.GoToAbout();
-            about.DownloadButtonClicked();
-
-            Assert.True(about.WaitForFileDownload(
-                Path.Combine(Directory.GetCurrentDirectory(), "Downloads"),
-                "EPAM_Corporate_Overview*.pdf",
-                10), "File was not downloaded successfully.");
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            DirectoryInfo di = new DirectoryInfo(Path.Combine(Directory.GetCurrentDirectory(), "Downloads"));
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
-            }
-
-            driver?.Quit();
-            driver?.Dispose();
+            Assert.That(fileHelper
+                .WaitForFileDownload(Path.Combine(Directory.GetCurrentDirectory(),
+                "Downloads"), fileName, 10), "File was not downloaded successfully.", true);
         }
     }
 }

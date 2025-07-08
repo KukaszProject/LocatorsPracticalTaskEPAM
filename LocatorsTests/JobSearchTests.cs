@@ -1,42 +1,27 @@
-﻿using LocatorsPracticalTask.Drivers;
+﻿using Core.Base;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
-    public class JobSearchTests
+    public class JobSearchTests : TestBase
     {
-        private IWebDriver? driver;
-
-        [SetUp]
-        public void Setup()
+        [TestCase(".NET", "All Locations")]
+        [TestCase("JavaScript", "All Locations")]
+        public void ValidateJobSearch(string keyword, string location)
         {
-            driver = DriverFactory.GetDriver();
-            driver.Navigate().GoToUrl("https://www.epam.com/");
-        }
+            var home = new HomePage(Driver);
+            var jobDetailsPage = new JobDetailsPage(Driver);
 
-        [TestCase(".NET")]
-        [TestCase("JavaScript")]
-        public void ValidateJobSearch(string keyword)
-        {
-            var home = new HomePage(driver);
-            home.AcceptCookies();
-            home.GoToCareers();
+            home.AcceptCookies()
+                .GoToCareers()
+                .SelectRemoteWorkOption()
+                .EnterKeyword(keyword)
+                .SelectLocation(location)
+                .ClickFindButton()
+                .SortByDate()
+                .OpenLastJob();
 
-            var careers = new CareersPage(driver);
-            careers.SearchJobs(keyword);
-            careers.SortByDate();
-            careers.OpenLastJob();
-
-            var job = new JobDetailsPage(driver);
-            Assert.IsTrue(job.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver?.Quit();
-            driver?.Dispose();
+            Assert.IsTrue(jobDetailsPage.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
         }
     }
 }
