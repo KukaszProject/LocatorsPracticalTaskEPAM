@@ -1,4 +1,4 @@
-using Core.Utilities;
+using Core.Base;
 using LocatorsPracticalTask.Pages;
 
 namespace LocatorsTests
@@ -12,15 +12,14 @@ namespace LocatorsTests
         public void ValidateGlobalSearch(string term)
         {
             var home = new HomePage(Driver);
-            var search = new GlobalSearchPage(Driver);
+            var globalSearchPage = new GlobalSearchPage(Driver);
 
-            home.AcceptCookies();
-            home.ClickSearchIcon();
+            home.AcceptCookies()
+                .ClickSearchIcon()
+                .Search(term)
+                .ClickFindButton();
 
-            search.Search(term);
-            search.ClickFindButton();
-
-            Assert.IsTrue(search.AllResultsContain(term), $"All results should contain: {term}");
+            Assert.That(globalSearchPage.AllResultsContain(term), $"All results should contain: {term}", true);
         }
     }
 }

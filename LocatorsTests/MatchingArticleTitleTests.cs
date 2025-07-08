@@ -1,4 +1,4 @@
-﻿using Core.Utilities;
+﻿using Core.Base;
 using LocatorsPracticalTask.Pages;
 
 namespace LocatorsTests
@@ -9,19 +9,16 @@ namespace LocatorsTests
         public void ValidateMatchingTitle()
         {
             var home = new HomePage(Driver);
-            var insights = new InsightsPage(Driver);
-            var article = new ArticleDetailsPage(Driver);
+            var insightsPage = new InsightsPage(Driver);
+            var articleDetailsPage = new ArticleDetailsPage(Driver);
 
-            home.AcceptCookies();
-            home.GoToInsights();
+            home.AcceptCookies()
+                .GoToInsights()
+                .ClickOnArrow(2)
+                .ClickOnReadMore()
+                .GetCurrentArticleTitle();
 
-            insights.ClickOnArrow(2);
-            insights.GetTitleOnCarousel();
-            insights.ClickOnReadMore();
-
-            article.GetCurrentArticleTitle();
-
-            Assert.That(article.IsArticleTitleMatching(insights.GetTitleOnCarousel()),
+            Assert.That(articleDetailsPage.IsArticleTitleMatching(insightsPage.GetTitleOnCarousel()),
                 "The article title does not match the expected title from the carousel.", true);
         }
     }

@@ -9,7 +9,12 @@ namespace LocatorsPracticalTask.Core.Utilities
         {
             try
             {
-                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                var timestamp = DateTime.Now.ToString("yyyy_MM_dd_HH-mm-ss");
                 var safeTestName = Regex.Replace(testName, @"[^\w\-]", "_");
                 var filePath = Path.Combine(directory, $"{safeTestName}_{timestamp}.png");
 

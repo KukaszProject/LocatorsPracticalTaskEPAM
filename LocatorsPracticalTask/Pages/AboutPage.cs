@@ -5,23 +5,17 @@ using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
 {
-    public class AboutPage
+    public class AboutPage : BasePage
     {
-        private readonly IWebDriver driver;
-        private readonly WebDriverWait wait;
-        private ILog Log => LogManager.GetLogger(GetType());
-        public AboutPage(IWebDriver driver)
-        {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        }
+        private IWebElement DownloadButton => Driver.FindElement(By.LinkText("DOWNLOAD"));
 
-        private IWebElement DownloadButton => driver.FindElement(By.LinkText("DOWNLOAD"));
+        public AboutPage(IWebDriver driver) : base(driver) { }
 
-        public void DownloadButtonClicked()
+        public AboutPage DownloadButtonClicked()
         {
-            Log.Info("Clicking the Download button on the About page...");
-            wait.Until(ExpectedConditions.ElementToBeClickable(DownloadButton)).Click();
+            LogAction("Clicking the Download button on the About page...");
+            Wait.Until(ExpectedConditions.ElementToBeClickable(DownloadButton)).Click();
+            return this;
         }
     }
 }

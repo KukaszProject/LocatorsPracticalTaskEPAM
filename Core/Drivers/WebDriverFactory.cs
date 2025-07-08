@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Core.Utilities
+namespace Core.Drivers
 {
     public class DriverFactory
     {

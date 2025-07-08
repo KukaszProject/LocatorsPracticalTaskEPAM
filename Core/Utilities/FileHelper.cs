@@ -1,7 +1,4 @@
-﻿using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-
-namespace LocatorsPracticalTask.Core.Utilities
+﻿namespace LocatorsPracticalTask.Core.Utilities
 {
     public class FileHelper
     {

@@ -1,25 +1,27 @@
-﻿using Core.Utilities;
+﻿using Core.Base;
 using LocatorsPracticalTask.Pages;
 
 namespace LocatorsTests
 {
     public class JobSearchTests : TestBase
     {
-        [TestCase(".NET")]
-        [TestCase("JavaScript")]
-        public void ValidateJobSearch(string keyword)
+        [TestCase(".NET", "All Locations")]
+        [TestCase("JavaScript", "All Locations")]
+        public void ValidateJobSearch(string keyword, string location)
         {
             var home = new HomePage(Driver);
-            var careers = new CareersPage(Driver);
-            var job = new JobDetailsPage(Driver);
+            var jobDetailsPage = new JobDetailsPage(Driver);
 
-            home.AcceptCookies();
-            home.GoToCareers();
-            careers.SearchJobs(keyword);
-            careers.SortByDate();
-            careers.OpenLastJob();
+            home.AcceptCookies()
+                .GoToCareers()
+                .SelectRemoteWorkOption()
+                .EnterKeyword(keyword)
+                .SelectLocation(location)
+                .ClickFindButton()
+                .SortByDate()
+                .OpenLastJob();
 
-            Assert.IsTrue(job.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
+            Assert.IsTrue(jobDetailsPage.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
         }
     }
 }

@@ -5,56 +5,57 @@ using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
 {
-    public class CareersPage
+    public class CareersPage : BasePage
     {
-        private readonly IWebDriver driver;
-        private readonly WebDriverWait wait;
-        private ILog Log => LogManager.GetLogger(GetType());
-
-        private IWebElement KeywordInput => driver.FindElement(By.Id("new_form_job_search-keyword"));
-        private IWebElement LocationDropdown => driver.FindElement(By.ClassName("select2-selection--single"));
-        private IWebElement RemoteInput => driver.FindElement(By.Name("remote"));
+        private IWebElement KeywordInput => Driver.FindElement(By.Id("new_form_job_search-keyword"));
+        private IWebElement LocationDropdown => Driver.FindElement(By.ClassName("select2-selection--single"));
+        private IWebElement RemoteInput => Driver.FindElement(By.Name("remote"));
         private IWebElement RemoteLabel => RemoteInput.FindElement(By.XPath("following-sibling::label"));
-        private IWebElement FindButton => driver.FindElement(By.XPath("//form[@id='jobSearchFilterForm']//descendant::button[@type='submit']"));
-        private IWebElement SortingList =>  driver.FindElement(By.ClassName("search-result__sorting-list"));
+        private IWebElement FindButton => Driver.FindElement(By.XPath("//form[@id='jobSearchFilterForm']//descendant::button[@type='submit']"));
+        private IWebElement SortingList =>  Driver.FindElement(By.ClassName("search-result__sorting-list"));
         private IWebElement SortByDateButton => SortingList.FindElement(By.XPath(".//label[@for='sort-time']"));
-        private IWebElement LatestJobResult => driver.FindElement(By.PartialLinkText("APPLY"));
+        private IWebElement LatestJobResult => Driver.FindElement(By.PartialLinkText("APPLY"));
 
-        public CareersPage(IWebDriver driver)
+        public CareersPage(IWebDriver driver) : base(driver) { }
+        public CareersPage EnterKeyword(string keyword)
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        }
-        public void SearchJobs(string keyword)
-        {
-            SelectRemoteWorkOption();
+            LogAction($"Searching for jobs with keyword: {keyword} on the Careers page...");
             KeywordInput.SendKeys(keyword);
-            SelectLocation("All Locations");
-            FindButton.Click();
+            return this;
         }
-        public void SelectRemoteWorkOption()
+        public CareersPage SelectRemoteWorkOption()
         {
-            Log.Info("Selecting remote work option on the Careers page...");
+            LogAction("Selecting remote work option on the Careers page...");
             RemoteLabel.Click();
+            return this;
         }
-        public void SelectLocation(string location)
+        public CareersPage SelectLocation(string location)
         {
-            Log.Info($"Selecting location: {location} on the Careers page...");
+            LogAction($"Selecting location: {location} on the Careers page...");
             LocationDropdown.Click();
-            var optionToSelect = wait.Until(driver =>
+            var optionToSelect = Wait.Until(driver =>
                 driver.FindElement(By.XPath($"//li[contains(@class, 'select2-results__option') and contains(text(),'{location}')]")));
 
             optionToSelect.Click();
+            return this;
         }
-        public void SortByDate()
+        public CareersPage ClickFindButton()
         {
-            Log.Info("Sorting job results by date on the Careers page...");
-            wait.Until(ExpectedConditions.ElementToBeClickable(SortByDateButton)).Click();
+            LogAction("Clicking the Find button on the Careers page...");
+            FindButton.Click();
+            return this;
         }
-        public void OpenLastJob()
+        public CareersPage SortByDate()
         {
-            Log.Info("Opening the latest job result on the Careers page...");
-            wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
+            LogAction("Sorting job results by date on the Careers page...");
+            Wait.Until(ExpectedConditions.ElementToBeClickable(SortByDateButton)).Click();
+            return this;
+        }
+        public JobDetailsPage OpenLastJob()
+        {
+            LogAction("Opening the latest job result on the Careers page...");
+            Wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
+            return new JobDetailsPage(Driver);
         }
     }
 }
