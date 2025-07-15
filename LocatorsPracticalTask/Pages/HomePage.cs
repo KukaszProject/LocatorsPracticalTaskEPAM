@@ -8,6 +8,7 @@ namespace LocatorsPracticalTask.Pages
         private IWebElement CareersLink => Driver.FindElement(By.LinkText("Careers"));
         private IWebElement AboutLink => Driver.FindElement(By.LinkText("About"));
         private IWebElement InsightsLink => Driver.FindElement(By.LinkText("Insights"));
+        private IWebElement ServicesLink => Driver.FindElement(By.LinkText("Services"));
         private IWebElement SearchIcon => Driver.FindElement(By.ClassName("header-search__button"));
 
         public HomePage(IWebDriver driver) : base(driver) { }
@@ -58,6 +59,11 @@ namespace LocatorsPracticalTask.Pages
         {
             InsightsLink.Click();
             return new InsightsPage(Driver);
+        }
+        public ServicesPage GoToServices()
+        {
+            ServicesLink.Click();
+            return new ServicesPage(Driver);
         }
     }
 }

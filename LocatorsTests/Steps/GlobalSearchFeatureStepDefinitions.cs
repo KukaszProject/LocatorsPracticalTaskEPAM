@@ -2,7 +2,6 @@ using Drivers;
 using LocatorsPracticalTask.Pages;
 using OpenQA.Selenium;
 using Reqnroll;
-using System;
 
 namespace Tests.Steps
 {
