@@ -1,28 +1,35 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace LocatorsPracticalTask.Drivers
+namespace Drivers
 {
-    public static class DriverFactory
+    public class DriverFactory
     {
+        private static IWebDriver? driver;
+
         public static IWebDriver GetDriver()
         {
-
-            string downloadPath = Path.Combine(Directory.GetCurrentDirectory(), "Downloads");
-
-            if (!Directory.Exists(downloadPath))
+            if (driver == null)
             {
+                var options = new ChromeOptions();
+                var downloadPath = Path.Combine(Directory.GetCurrentDirectory(), "Downloads");
                 Directory.CreateDirectory(downloadPath);
+
+                options.AddArgument("--start-maximized");
+                options.AddUserProfilePreference("download.default_directory", downloadPath);
+                options.AddUserProfilePreference("download.prompt_for_download", false);
+                options.AddUserProfilePreference("disable-popup-blocking", true);
+
+                driver = new ChromeDriver(options);
             }
+            return driver;
+        }
 
-            var options = new ChromeOptions();
-
-            options.AddArgument("--start-maximized");
-            options.AddUserProfilePreference("download.default_directory", downloadPath);
-            options.AddUserProfilePreference("download.prompt_for_download", false);
-            options.AddUserProfilePreference("disable-popup-blocking", true);
-
-            return new ChromeDriver(options);
+        public static void QuitDriver()
+        {
+            driver?.Quit();
+            driver?.Dispose();
+            driver = null;
         }
     }
 }

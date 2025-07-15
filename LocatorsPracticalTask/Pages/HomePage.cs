@@ -1,38 +1,63 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
 {
-    public class HomePage
+    public class HomePage : BasePage
     {
-        private readonly IWebDriver driver;
-        private readonly WebDriverWait wait;
+        private IWebElement CareersLink => Driver.FindElement(By.LinkText("Careers"));
+        private IWebElement AboutLink => Driver.FindElement(By.LinkText("About"));
+        private IWebElement InsightsLink => Driver.FindElement(By.LinkText("Insights"));
+        private IWebElement SearchIcon => Driver.FindElement(By.ClassName("header-search__button"));
 
-        public HomePage(IWebDriver driver)
+        public HomePage(IWebDriver driver) : base(driver) { }
+
+        public HomePage AcceptCookies()
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        }
-        private IWebElement AcceptCookiesBtn => wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("onetrust-accept-btn-handler")));
-        private IWebElement CareersLink => driver.FindElement(By.LinkText("Careers"));
+            var acceptBtnBy = By.Id("onetrust-accept-btn-handler");
 
-        private IWebElement AboutLink => driver.FindElement(By.LinkText("About"));
-        private IWebElement InsightsLink => driver.FindElement(By.LinkText("Insights"));
-        private IWebElement SearchIcon => driver.FindElement(By.ClassName("header-search__button"));
-
-        public void AcceptCookies()
-        {
-            var cookieButton = wait.Until(ExpectedConditions.ElementToBeClickable(AcceptCookiesBtn));
-            if (cookieButton.Displayed && cookieButton.Enabled)
+            try
             {
-                Thread.Sleep(300);
-                cookieButton.Click();
+                Wait.Until(ExpectedConditions.ElementIsVisible(acceptBtnBy));
+                Wait.Until(ExpectedConditions.ElementToBeClickable(acceptBtnBy));
+
+                var cookieButton = Driver.FindElement(acceptBtnBy);
+
+                try
+                {
+                    cookieButton.Click();
+                }
+                catch (ElementClickInterceptedException)
+                {
+                    ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].click();", cookieButton);
+                }
             }
+            catch (WebDriverTimeoutException)
+            {
+                throw new Exception("Accept cookies button not found or not clickable within the timeout period.");
+            }
+            return this;
         }
-        public void GoToCareers() => CareersLink.Click();
-        public void GoToAbout() => AboutLink.Click();
-        public void GoToInsights() => InsightsLink.Click();
-        public void ClickSearchIcon() => SearchIcon.Click();
+
+        public GlobalSearchPage ClickSearchIcon()
+        {
+            SearchIcon.Click();
+            return new GlobalSearchPage(Driver);
+        }
+        public CareersPage GoToCareers()
+        {
+            CareersLink.Click();
+            return new CareersPage(Driver);
+        }
+        public AboutPage GoToAbout()
+        {
+            AboutLink.Click();
+            return new AboutPage(Driver);
+        }
+        public InsightsPage GoToInsights()
+        {
+            InsightsLink.Click();
+            return new InsightsPage(Driver);
+        }
     }
 }

@@ -1,38 +1,37 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocatorsPracticalTask.Pages
 {
-    public class InsightsPage
+    public class InsightsPage : BasePage
     {
-        private readonly IWebDriver driver;
-        private readonly WebDriverWait wait;
+        public InsightsPage(IWebDriver driver) : base(driver) { }
+        private IWebElement RightArrowButton => Driver.FindElement(By.ClassName("slider__right-arrow"));
+        private IWebElement TitleOnCarousel => Driver.FindElement(By.CssSelector("p.scaling-of-text-wrapper"));
 
-        public InsightsPage(IWebDriver driver)
-        {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        }
-        private IWebElement RightArrowButton => wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("slider__right-arrow")));
-        private IWebElement TitleOnCarousel => driver.FindElement(By.CssSelector("p.scaling-of-text-wrapper"));
+        private IWebElement ReadMoreButton => Wait.Until(ExpectedConditions.ElementIsVisible(By.PartialLinkText("Read")));
 
-        private IWebElement ReadMoreButton => wait.Until(ExpectedConditions.ElementIsVisible(By.PartialLinkText("Read")));
-
-        public void ClickOnArrow(int numberOfClicks)
+        public InsightsPage ClickOnArrow(int numberOfClicks = 1)
         {
             for (int i = 0; i < numberOfClicks; i++)
             {
-                var waitForArrow = wait.Until(ExpectedConditions.ElementToBeClickable(RightArrowButton));
+                var waitForArrow = Wait.Until(ExpectedConditions.ElementToBeClickable(RightArrowButton));
                 RightArrowButton.Click();
             }
+
+            return this;
         }
-        public string GetTitleOnCarousel() => TitleOnCarousel.Text.Trim();
-        public void ClickOnReadMore() => ReadMoreButton.Click();
+        public ArticleDetailsPage ClickOnReadMore()
+        {
+            var waitForReadMore = Wait.Until(ExpectedConditions.ElementToBeClickable(ReadMoreButton));
+            ReadMoreButton.Click();
+
+            return new ArticleDetailsPage(Driver);
+        }
+        public string GetTitleOnCarousel()
+        {
+            return TitleOnCarousel.Text.Trim();
+        }
     }
 }
