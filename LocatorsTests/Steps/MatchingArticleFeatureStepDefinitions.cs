@@ -1,4 +1,3 @@
-using System;
 using Drivers;
 using LocatorsPracticalTask.Pages;
 using OpenQA.Selenium;

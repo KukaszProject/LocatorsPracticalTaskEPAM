@@ -18,16 +18,17 @@ namespace LocatorsTests.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("GlobalSearchFeature")]
+    [NUnit.Framework.DescriptionAttribute("Global Search Functionality")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class GlobalSearchFeatureFeature
+    public partial class GlobalSearchFunctionalityFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "GlobalSearchFeature", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Global Search Functionality", "As a user, I want to perform a global search from the EPAM homepage so that I can" +
+                " quickly find relevant content.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "GlobalSearchFeature.feature"
 #line hidden
@@ -104,17 +105,20 @@ namespace LocatorsTests.Features
         
         public virtual async global::System.Threading.Tasks.Task FeatureBackgroundAsync()
         {
-#line 3
+#line 4
+#line hidden
+#line 5
+ await testRunner.GivenAsync("I am on the EPAM home page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I perform a global search on the EPAM home page")]
+        [NUnit.Framework.DescriptionAttribute("Display relevant results for various search keywords")]
         [NUnit.Framework.CategoryAttribute("smoke")]
         [NUnit.Framework.TestCaseAttribute("BLOCKCHAIN", null)]
         [NUnit.Framework.TestCaseAttribute("Automation", null)]
         [NUnit.Framework.TestCaseAttribute("Cloud", null)]
-        public async global::System.Threading.Tasks.Task IPerformAGlobalSearchOnTheEPAMHomePage(string keyword, string[] exampleTags)
+        public async global::System.Threading.Tasks.Task DisplayRelevantResultsForVariousSearchKeywords(string keyword, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "smoke"};
@@ -125,8 +129,8 @@ namespace LocatorsTests.Features
             string[] tagsOfScenario = @__tags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("keyword", keyword);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("I perform a global search on the EPAM home page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 7
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Display relevant results for various search keywords", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -136,14 +140,11 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 3
+#line 4
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 8
- await testRunner.GivenAsync("I am on the EPAM home page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
 #line 9
- await testRunner.AndAsync("I navigate to the Global Search", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.GivenAsync("I navigate to the Global Search", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 10
  await testRunner.WhenAsync(string.Format("I enter \"{0}\" in the search field", keyword), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");

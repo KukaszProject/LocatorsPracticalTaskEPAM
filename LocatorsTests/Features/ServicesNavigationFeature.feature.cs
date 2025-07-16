@@ -18,16 +18,17 @@ namespace LocatorsTests.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("ServicesNavigationFeature")]
+    [NUnit.Framework.DescriptionAttribute("Services Navigation and Validation")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class ServicesNavigationFeatureFeature
+    public partial class ServicesNavigationAndValidationFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "ServicesNavigationFeature", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Services Navigation and Validation", "As a user, I want to navigate to specific service categories under the Artificial" +
+                " Intelligence section to verify their content and related expertise.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "ServicesNavigationFeature.feature"
 #line hidden
@@ -104,22 +105,23 @@ namespace LocatorsTests.Features
         
         public virtual async global::System.Threading.Tasks.Task FeatureBackgroundAsync()
         {
-#line 3
-#line hidden
 #line 4
+#line hidden
+#line 5
  await testRunner.GivenAsync("I am on the EPAM home page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigate to <ServiceCategory> page and validate section")]
-        [NUnit.Framework.CategoryAttribute("Smoke")]
+        [NUnit.Framework.DescriptionAttribute("Navigate to Generative AI service category by hovering navigation bar and validat" +
+            "e content")]
+        [NUnit.Framework.CategoryAttribute("smoke")]
         [NUnit.Framework.TestCaseAttribute("Generative AI", null)]
         [NUnit.Framework.TestCaseAttribute("Responsible AI", null)]
-        public async global::System.Threading.Tasks.Task NavigateToServiceCategoryPageAndValidateSection(string serviceCategory, string[] exampleTags)
+        public async global::System.Threading.Tasks.Task NavigateToGenerativeAIServiceCategoryByHoveringNavigationBarAndValidateContent(string serviceCategory, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Smoke"};
+                    "smoke"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -127,8 +129,9 @@ namespace LocatorsTests.Features
             string[] tagsOfScenario = @__tags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("ServiceCategory", serviceCategory);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Navigate to <ServiceCategory> page and validate section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 7
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Navigate to Generative AI service category by hovering navigation bar and validat" +
+                    "e content", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 8
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -138,23 +141,20 @@ namespace LocatorsTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 3
+#line 4
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 8
- await testRunner.GivenAsync("I navigate to the Services page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
 #line 9
-    await testRunner.WhenAsync("I navigate to the Artificial Inteligence section", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.GivenAsync("I open Services navigation bar", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 10
-    await testRunner.AndAsync(string.Format("I click on the \"{0}\" service category", serviceCategory), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.WhenAsync(string.Format("I click on the \"{0}\" service category", serviceCategory), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 11
- await testRunner.ThenAsync(string.Format("\"{0}\" should contain the expected text", serviceCategory), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync(string.Format("\"{0}\" should contain the expected text", serviceCategory), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
 #line 12
-    await testRunner.AndAsync("Our Related Expertise should be displayed", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("Our Related Expertise should be displayed", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

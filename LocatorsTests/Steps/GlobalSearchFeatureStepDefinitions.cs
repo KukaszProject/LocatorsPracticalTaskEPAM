@@ -22,14 +22,6 @@ namespace Tests.Steps
             globalSearchPage = new GlobalSearchPage(driver);
         }
 
-        [Given(@"I am on the EPAM home page")]
-        public void GivenIAmOnTheHomePage()
-        {
-            driver.Navigate().GoToUrl("https://www.epam.com/");
-            homePage = new HomePage(driver);
-            homePage.AcceptCookies();
-        }
-
         [Given("I navigate to the Global Search")]
         public void GivenINavigateToTheGlobalSearch()
         {
@@ -47,7 +39,6 @@ namespace Tests.Steps
         {
             globalSearchPage?.ClickFindButton();
         }
-
 
         [Then("I should see search results related to \"(.*)\"")]
         public void ThenIShouldSeeSearchResultsRelatedToKeyword(string keyword)

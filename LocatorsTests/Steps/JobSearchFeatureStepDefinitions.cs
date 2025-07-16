@@ -67,7 +67,6 @@ namespace Tests.Steps
             careersPage?.OpenLastJob();
         }
 
-
         [Then(@"I should see job listings related to ""(.*)""")]
         public void ThenIShouldSeeJobListingsRelatedTo(string keyword)
         {

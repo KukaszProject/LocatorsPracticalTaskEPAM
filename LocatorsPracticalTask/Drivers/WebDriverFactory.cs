@@ -28,7 +28,6 @@ namespace Drivers
         public static void QuitDriver()
         {
             driver?.Quit();
-            driver?.Dispose();
             driver = null;
         }
     }

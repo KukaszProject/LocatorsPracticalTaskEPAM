@@ -1,17 +1,23 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
 {
     public class HomePage : BasePage
     {
+        
         private IWebElement CareersLink => Driver.FindElement(By.LinkText("Careers"));
         private IWebElement AboutLink => Driver.FindElement(By.LinkText("About"));
         private IWebElement InsightsLink => Driver.FindElement(By.LinkText("Insights"));
         private IWebElement ServicesLink => Driver.FindElement(By.LinkText("Services"));
         private IWebElement SearchIcon => Driver.FindElement(By.ClassName("header-search__button"));
 
-        public HomePage(IWebDriver driver) : base(driver) { }
+        public HomePage(IWebDriver driver) : base(driver)
+        {
+            Actions action = new Actions(Driver);
+        }
 
         public HomePage AcceptCookies()
         {
@@ -37,6 +43,30 @@ namespace LocatorsPracticalTask.Pages
             {
                 throw new Exception("Accept cookies button not found or not clickable within the timeout period.");
             }
+            return this;
+        }
+
+        public HomePage OpenServicesNavigationBar()
+        {
+            var parentMenu = Driver.FindElement(By.CssSelector("a.top-navigation__main-link[href='/services/artificial-intelligence']"));
+
+            Actions actions = new Actions(Driver);
+            actions.MoveToElement(ServicesLink).Perform();
+            actions.MoveToElement(parentMenu).Perform();
+            return this;
+        }
+
+        public HomePage NavigateToCategory(string serviceName)
+        {
+
+            var serviceNameFormatted = string.Join("-", serviceName
+                .ToLower().Split([' '], StringSplitOptions.RemoveEmptyEntries));
+
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            var subMenu = wait.Until(ExpectedConditions.ElementToBeClickable(
+                By.CssSelector($"a.top-navigation__sub-link[href='/services/artificial-intelligence/{serviceNameFormatted}']")));
+
+            subMenu.Click();
             return this;
         }
 

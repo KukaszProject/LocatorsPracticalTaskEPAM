@@ -1,11 +1,11 @@
-﻿Feature: MatchingArticleFeature
-Checking if the article title matches
+﻿Feature:  Article Title Matching on Insights Page
+As a user, I want to verify that the article title displayed matches the expected title after navigation, ensuring correct content is shown.
 
 Background: 
 	Given I am on the EPAM home page
 
 @smoke
-Scenario: I check the article title using the matching article feature
+Scenario: Verify article title after navigating through featured articles
 	Given I navigate to the Insights Page
 	When I click on the arrow twice
 	And  I click on the read more button

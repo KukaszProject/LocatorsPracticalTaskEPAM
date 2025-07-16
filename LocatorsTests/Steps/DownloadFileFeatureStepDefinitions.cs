@@ -5,14 +5,14 @@ using OpenQA.Selenium;
 using Reqnroll;
 
 [Binding]
-public class DownloadFileSteps
+public class DownloadFileFeatureStepDefinitions
 {
     private static IWebDriver driver = DriverFactory.GetDriver();
     private HomePage? homePage;
     private AboutPage? aboutPage;
     private FileHelper fileHelper = new FileHelper();
 
-    DownloadFileSteps()
+    DownloadFileFeatureStepDefinitions()
     {
         if (driver == null)
         {
@@ -42,5 +42,4 @@ public class DownloadFileSteps
                 .WaitForFileDownload(Path.Combine(Directory.GetCurrentDirectory(),
                 "Downloads"), "EPAM_Corporate_Overview*.pdf", 10), "File was not downloaded successfully.", true);
     }
-
 }

@@ -18,16 +18,17 @@ namespace LocatorsTests.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("JobSearchFeature")]
+    [NUnit.Framework.DescriptionAttribute("Job Search Functionality")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class JobSearchFeatureFeature
+    public partial class JobSearchFunctionalityFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "JobSearchFeature", "Validating job search\r\nA short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Job Search Functionality", "As a job seeker, I want to search for remote jobs using specific keywords so that" +
+                " I can find relevant opportunities on the EPAM Careers page.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "JobSearchFeature.feature"
 #line hidden
@@ -104,19 +105,19 @@ namespace LocatorsTests.Features
         
         public virtual async global::System.Threading.Tasks.Task FeatureBackgroundAsync()
         {
-#line 5
+#line 4
 #line hidden
-#line 6
+#line 5
  await testRunner.GivenAsync("I am on the EPAM home page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I search for a job using the job search feature")]
+        [NUnit.Framework.DescriptionAttribute("Searching for remote job opportunities using specific keywords")]
         [NUnit.Framework.CategoryAttribute("smoke")]
         [NUnit.Framework.TestCaseAttribute(".NET", null)]
         [NUnit.Framework.TestCaseAttribute("Java", null)]
-        public async global::System.Threading.Tasks.Task ISearchForAJobUsingTheJobSearchFeature(string keyword, string[] exampleTags)
+        public async global::System.Threading.Tasks.Task SearchingForRemoteJobOpportunitiesUsingSpecificKeywords(string keyword, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "smoke"};
@@ -127,8 +128,8 @@ namespace LocatorsTests.Features
             string[] tagsOfScenario = @__tags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("keyword", keyword);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("I search for a job using the job search feature", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 9
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Searching for remote job opportunities using specific keywords", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -138,31 +139,31 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 5
+#line 4
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 10
+#line 9
  await testRunner.GivenAsync("I navigate to the Careers Page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 11
+#line 10
  await testRunner.WhenAsync("I select remote work option", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 12
+#line 11
  await testRunner.AndAsync(string.Format("I enter \"{0}\" in the job search field", keyword), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 13
+#line 12
  await testRunner.AndAsync("I select All Locations from location dropdown", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 14
+#line 13
  await testRunner.AndAsync("I click the search button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 15
+#line 14
  await testRunner.AndAsync("I sort by date", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 16
+#line 15
  await testRunner.AndAsync("I open latest job offer", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 17
+#line 16
  await testRunner.ThenAsync(string.Format("I should see job listings related to \"{0}\"", keyword), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

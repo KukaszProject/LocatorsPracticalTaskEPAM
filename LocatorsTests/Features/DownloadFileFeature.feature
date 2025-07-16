@@ -1,9 +1,11 @@
-﻿Feature: Download File Feature
-Downloading file from About Page
+﻿Feature: File Download from About Page
+As a user, I want to download a file from the About page so that I can access its contents offline.
+
+Background: 
+	Given I am on the EPAM home page
 
 @smoke
-Scenario: I download the file
-	Given I am on the EPAM home page
-	And I navigate to the About Page
+Scenario: Successful file download from the About page
+	Given I navigate to the About Page
 	When I click the download button
 	Then the file should be downloaded

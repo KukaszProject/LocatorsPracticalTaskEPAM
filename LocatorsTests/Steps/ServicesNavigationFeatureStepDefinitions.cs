@@ -21,32 +21,19 @@ namespace LocatorsTests.Steps
             homePage = new HomePage(driver);
             servicesPage = new ServicesPage(driver);
         }
-
-        [Given("I navigate to the Services page")]
-        public void GivenINavigateToTheServicesPage()
+        
+        [Given("I open Services navigation bar")]
+        public void GivenIOpenServicesNavigationBar()
         {
-            homePage?.GoToServices();
+            homePage?.OpenServicesNavigationBar();
         }
 
-        [When("I navigate to the Artificial Inteligence section")]
-        public void WhenINavigateToTheArtificialInteligenceSection()
-        {
-            servicesPage?.ClickOnArtificialIntelligence();
-        }
 
         [When(@"I click on the ""(.*)"" service category")]
         public void WhenIClickOnTheServiceCategory(string category)
         {
-            servicesPage?.NavigateToCategory(category);
+            homePage?.NavigateToCategory(category);
         }
-
-        //[When(@"I click on the ""(.*)"" service category")]
-        //public void WhenIClickOnTheServiceCategory(string category)
-        //{
-        //    servicesPage = homePage!.NavigateToService(category);
-        //}
-
-
 
         [Then(@"""(.*)"" should contain the expected text")]
         public void ThenShouldContainTheExpectedText(string category)
@@ -63,6 +50,5 @@ namespace LocatorsTests.Steps
             Assert.That(servicesPage.IsRelatedExpertiseSectionVisible(),
                 "The 'Our Related Expertise' section is not visible.", true);
         }
-
     }
 }

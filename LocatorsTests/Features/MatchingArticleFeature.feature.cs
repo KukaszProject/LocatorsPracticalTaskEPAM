@@ -18,16 +18,17 @@ namespace LocatorsTests.Features
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("MatchingArticleFeature")]
+    [NUnit.Framework.DescriptionAttribute("Article Title Matching on Insights Page")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class MatchingArticleFeatureFeature
+    public partial class ArticleTitleMatchingOnInsightsPageFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "MatchingArticleFeature", "Checking if the article title matches", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Article Title Matching on Insights Page", "As a user, I want to verify that the article title displayed matches the expected" +
+                " title after navigation, ensuring correct content is shown.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "MatchingArticleFeature.feature"
 #line hidden
@@ -112,14 +113,14 @@ namespace LocatorsTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I check the article title using the matching article feature")]
+        [NUnit.Framework.DescriptionAttribute("Verify article title after navigating through featured articles")]
         [NUnit.Framework.CategoryAttribute("smoke")]
-        public async global::System.Threading.Tasks.Task ICheckTheArticleTitleUsingTheMatchingArticleFeature()
+        public async global::System.Threading.Tasks.Task VerifyArticleTitleAfterNavigatingThroughFeaturedArticles()
         {
             string[] tagsOfScenario = new string[] {
                     "smoke"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("I check the article title using the matching article feature", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Verify article title after navigating through featured articles", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
