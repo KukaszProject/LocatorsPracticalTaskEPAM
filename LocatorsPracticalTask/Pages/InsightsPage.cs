@@ -1,6 +1,4 @@
-﻿using log4net;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
@@ -15,7 +13,7 @@ namespace LocatorsPracticalTask.Pages
 
         public InsightsPage ClickOnArrow(int numberOfClicks = 1)
         {
-            LogAction($"Clicking on the right arrow {numberOfClicks} times on the Insights page...");
+            Log.Info($"Clicking on the right arrow {numberOfClicks} times on the Insights page...");
             for (int i = 0; i < numberOfClicks; i++)
             {
                 var waitForArrow = Wait.Until(ExpectedConditions.ElementToBeClickable(RightArrowButton));
@@ -26,7 +24,7 @@ namespace LocatorsPracticalTask.Pages
         }
         public ArticleDetailsPage ClickOnReadMore()
         {
-            LogAction("Clicking on the Read More button on the Insights page...");
+            Log.Info("Clicking on the Read More button on the Insights page...");
             var waitForReadMore = Wait.Until(ExpectedConditions.ElementToBeClickable(ReadMoreButton));
             ReadMoreButton.Click();
 
@@ -34,7 +32,7 @@ namespace LocatorsPracticalTask.Pages
         }
         public string GetTitleOnCarousel()
         {
-            LogAction("Retrieving the title on the carousel on the Insights page...");
+            Log.Info("Retrieving the title on the carousel on the Insights page...");
             return TitleOnCarousel.Text.Trim();
         }
     }

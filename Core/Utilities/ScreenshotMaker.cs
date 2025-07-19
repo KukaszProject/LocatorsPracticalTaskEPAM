@@ -1,12 +1,16 @@
 ﻿using OpenQA.Selenium;
 using System.Text.RegularExpressions;
+using log4net;
 
 namespace LocatorsPracticalTask.Core.Utilities
 {
     public static class ScreenshotMaker
     {
-        public static string TakeScreenshot(IWebDriver driver, string testName, string directory = "Screenshots")
+        private static ILog Log => Logger.Instance;
+
+        public static string TakeScreenshot(IWebDriver driver, string testName)
         {
+            var directory = ConfigHelper.Get("ScreenshotsFolder");
             try
             {
                 if (!Directory.Exists(directory))
@@ -18,6 +22,7 @@ namespace LocatorsPracticalTask.Core.Utilities
                 var safeTestName = Regex.Replace(testName, @"[^\w\-]", "_");
                 var filePath = Path.Combine(directory, $"{safeTestName}_{timestamp}.png");
 
+                Log.Info($"Capturing screenshot for test: {testName} at {filePath}...");
                 var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
                 screenshot.SaveAsFile(filePath);
 
@@ -25,6 +30,7 @@ namespace LocatorsPracticalTask.Core.Utilities
             }
             catch (Exception ex)
             {
+                Log.Error($"Failed to capture screenshot for test: {testName}. Error: {ex.Message}");
                 return $"Failed to capture screenshot: {ex.Message}";
             }
         }

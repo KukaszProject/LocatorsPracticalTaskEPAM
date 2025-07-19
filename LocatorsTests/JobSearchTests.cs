@@ -10,18 +10,19 @@ namespace LocatorsTests
         public void ValidateJobSearch(string keyword, string location)
         {
             var home = new HomePage(Driver);
-            var jobDetailsPage = new JobDetailsPage(Driver);
 
-            home.AcceptCookies()
+            var isContainsKeyword = 
+                home.AcceptCookies()
                 .GoToCareers()
                 .SelectRemoteWorkOption()
                 .EnterKeyword(keyword)
                 .SelectLocation(location)
                 .ClickFindButton()
                 .SortByDate()
-                .OpenLastJob();
+                .OpenLastJob()
+                .ContainsKeyword(keyword);
 
-            Assert.IsTrue(jobDetailsPage.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
+            Assert.IsTrue(isContainsKeyword, $"Job page should contain keyword: {keyword}");
         }
     }
 }

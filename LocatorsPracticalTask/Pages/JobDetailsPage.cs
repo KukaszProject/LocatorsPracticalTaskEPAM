@@ -1,5 +1,4 @@
-﻿using log4net;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace LocatorsPracticalTask.Pages
 {
@@ -9,7 +8,7 @@ namespace LocatorsPracticalTask.Pages
 
         public bool ContainsKeyword(string keyword)
         {
-            LogAction($"Checking if the job page contains the keyword: {keyword} ...");
+            Log.Info($"Checking if the job page contains the keyword: {keyword} ...");
             return Driver.PageSource.ToLower().Contains(keyword.ToLower());
         }
     }

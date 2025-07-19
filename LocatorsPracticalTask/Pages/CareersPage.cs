@@ -1,6 +1,4 @@
-﻿using log4net;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
@@ -19,19 +17,19 @@ namespace LocatorsPracticalTask.Pages
         public CareersPage(IWebDriver driver) : base(driver) { }
         public CareersPage EnterKeyword(string keyword)
         {
-            LogAction($"Searching for jobs with keyword: {keyword} on the Careers page...");
+            Log.Info($"Searching for jobs with keyword: {keyword} on the Careers page...");
             KeywordInput.SendKeys(keyword);
             return this;
         }
         public CareersPage SelectRemoteWorkOption()
         {
-            LogAction("Selecting remote work option on the Careers page...");
+            Log.Info("Selecting remote work option on the Careers page...");
             RemoteLabel.Click();
             return this;
         }
         public CareersPage SelectLocation(string location)
         {
-            LogAction($"Selecting location: {location} on the Careers page...");
+            Log.Info($"Selecting location: {location} on the Careers page...");
             LocationDropdown.Click();
             var optionToSelect = Wait.Until(driver =>
                 driver.FindElement(By.XPath($"//li[contains(@class, 'select2-results__option') and contains(text(),'{location}')]")));
@@ -41,19 +39,19 @@ namespace LocatorsPracticalTask.Pages
         }
         public CareersPage ClickFindButton()
         {
-            LogAction("Clicking the Find button on the Careers page...");
+            Log.Info("Clicking the Find button on the Careers page...");
             FindButton.Click();
             return this;
         }
         public CareersPage SortByDate()
         {
-            LogAction("Sorting job results by date on the Careers page...");
+            Log.Info("Sorting job results by date on the Careers page...");
             Wait.Until(ExpectedConditions.ElementToBeClickable(SortByDateButton)).Click();
             return this;
         }
         public JobDetailsPage OpenLastJob()
         {
-            LogAction("Opening the latest job result on the Careers page...");
+            Log.Info("Opening the latest job result on the Careers page...");
             Wait.Until(ExpectedConditions.ElementToBeClickable(LatestJobResult)).Click();
             return new JobDetailsPage(Driver);
         }

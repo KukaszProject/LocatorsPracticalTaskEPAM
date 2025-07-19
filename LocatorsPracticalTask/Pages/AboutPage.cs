@@ -1,6 +1,4 @@
-﻿using log4net;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
@@ -13,7 +11,7 @@ namespace LocatorsPracticalTask.Pages
 
         public AboutPage DownloadButtonClicked()
         {
-            LogAction("Clicking the Download button on the About page...");
+            Log.Info("Clicking the Download button on the About page...");
             Wait.Until(ExpectedConditions.ElementToBeClickable(DownloadButton)).Click();
             return this;
         }

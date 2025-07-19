@@ -1,6 +1,4 @@
-﻿using log4net;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
 namespace LocatorsPracticalTask.Pages
@@ -15,46 +13,52 @@ namespace LocatorsPracticalTask.Pages
 
         public GlobalSearchPage Search(string term)
         {
-            LogAction($"Searching for term: {term} on the Global Search page...");
+            Log.Info($"Searching for term: {term} on the Global Search page...");
             var searchInput = Wait.Until(ExpectedConditions.ElementIsVisible(SearchInput));
             searchInput.SendKeys(term);
             return this;
         }
         public GlobalSearchPage ClickFindButton()
         {
-            LogAction("Clicking the Find button on the Global Search page...");
+            Log.Info("Clicking the Find button on the Global Search page...");
             FindButton.Click();
             return this;
         }
 
         public bool AllResultsContain(string term)
         {
-            LogAction($"Checking if all results contain the term: {term} ...");
+            Log.Info($"Checking if all results contain the term: {term} ...");
 
             var allResults = Wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(Results));
             if (allResults.Count == 0)
             {
-                LogWarning("No results found.");
+                Log.Warn("No results found.");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(term))
             {
-                LogWarning("Search term is empty or null.");
+                Log.Warn("Search term is empty or null.");
                 return false;
             }
-            LogAction($"Number of results found: {allResults.Count}");
-            LogAction("Verifying if all results contain the search term...");
+            Log.Info($"Number of results found: {allResults.Count}");
+            Log.Info("Verifying if all results contain the search term...");
 
             foreach (var result in allResults)
             {
+                if (result == null)
+                {
+                    Log.Error("A result is null, skipping verification.");
+                    throw new NullReferenceException("A result element is null.");
+                }
+
                 var text = result.Text.Trim().ToLower();
                 if (!text.Contains(term.ToLower()))
                 {
-                    LogWarning($"Result '{text}' does not contain the term '{term}'.");
+                    Log.Warn($"Result '{text}' does not contain the term '{term}'.");
                     return false;
                 }
             }
-            LogAction("All results contain the search term.");
+            Log.Info("All results contain the search term.");
             return true;
         }
     }

@@ -13,20 +13,5 @@ public abstract class BasePage
         Driver = driver;
         Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
     }
-
-    protected void LogAction(string message)
-    {
-        Log.Info($"[PageAction] {message}");
-    }
-
-    protected void LogWarning(string message)
-    {
-        Log.Warn($"[PageWarning] {message}");
-    }
-
-    protected void LogError(string message)
-    {
-        Log.Error($"[PageError] {message}");
-    }
 }
 

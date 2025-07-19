@@ -1,5 +1,4 @@
-﻿using log4net;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace LocatorsPracticalTask.Pages
 {
@@ -9,12 +8,12 @@ namespace LocatorsPracticalTask.Pages
 
         public string GetCurrentArticleTitle()
         {
-            LogAction("Retrieving the current article title...");
+            Log.Info("Retrieving the current article title...");
             return Driver.Title;
         }
         public bool IsArticleTitleMatching(string expectedTitle)
         {
-            LogAction($"Checking if the article title matches the expected title: {expectedTitle} ...");
+            Log.Info($"Checking if the article title matches the expected title: {expectedTitle} ...");
             return GetCurrentArticleTitle().Contains(expectedTitle, StringComparison.OrdinalIgnoreCase);
         }
     }

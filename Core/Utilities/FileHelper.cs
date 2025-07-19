@@ -1,7 +1,11 @@
-﻿namespace LocatorsPracticalTask.Core.Utilities
+﻿using log4net;
+
+namespace LocatorsPracticalTask.Core.Utilities
 {
     public class FileHelper
     {
+        private static ILog Log = Logger.Instance;
+
         public bool WaitForFileDownload(string directory, string expectedFileName, int timeoutSeconds = 10)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
