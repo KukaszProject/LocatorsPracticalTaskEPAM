@@ -1,48 +1,25 @@
-﻿using LocatorsPracticalTask.Drivers;
+﻿using Core.Base;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
-    public class MatchingArticleTitleTests
+    public class MatchingArticleTitleTests : TestBase
     {
-        private IWebDriver? driver;
-
-        [SetUp]
-        public void Setup()
-        {
-            driver = DriverFactory.GetDriver();
-            driver.Navigate().GoToUrl("https://www.epam.com/");
-        }
-
         [Test]
         public void ValidateMatchingTitle()
         {
-            var home = new HomePage(driver);
-            var insights = new InsightsPage(driver);
-            var article = new ArticleDetailsPage(driver);
+            var home = new HomePage(Driver);
+            var insightsPage = new InsightsPage(Driver);
+            var articleDetailsPage = new ArticleDetailsPage(Driver);
 
-            home.AcceptCookies();
-            home.GoToInsights();
-            insights.ClickOnArrow(2);
-            insights.GetTitleOnCarousel();
-            insights.ClickOnReadMore();
-            article.GetCurrentArticleTitle();
+            home.AcceptCookies()
+                .GoToInsights()
+                .ClickOnArrow(2)
+                .ClickOnReadMore()
+                .GetCurrentArticleTitle();
 
-            Assert.IsTrue(article.IsArticleTitleMatching(insights.GetTitleOnCarousel()),
-                "The article title does not match the expected title from the carousel.");
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver?.Quit();
-            driver?.Dispose();
+            Assert.That(articleDetailsPage.IsArticleTitleMatching(insightsPage.GetTitleOnCarousel()),
+                "The article title does not match the expected title from the carousel.", true);
         }
     }
 }

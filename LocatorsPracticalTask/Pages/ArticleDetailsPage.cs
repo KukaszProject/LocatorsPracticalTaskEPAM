@@ -1,17 +1,20 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocatorsPracticalTask.Pages
 {
-    public class ArticleDetailsPage
+    public class ArticleDetailsPage : BasePage
     {
-        private readonly IWebDriver driver;
-        public ArticleDetailsPage(IWebDriver driver) => this.driver = driver;
-        public string GetCurrentArticleTitle() => driver.Title;
-        public bool IsArticleTitleMatching(string expectedTitle) => GetCurrentArticleTitle().Contains(expectedTitle, StringComparison.OrdinalIgnoreCase);
+        public ArticleDetailsPage(IWebDriver driver) : base(driver) { }
+
+        public string GetCurrentArticleTitle()
+        {
+            Log.Info("Retrieving the current article title...");
+            return Driver.Title;
+        }
+        public bool IsArticleTitleMatching(string expectedTitle)
+        {
+            Log.Info($"Checking if the article title matches the expected title: {expectedTitle} ...");
+            return GetCurrentArticleTitle().Contains(expectedTitle, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

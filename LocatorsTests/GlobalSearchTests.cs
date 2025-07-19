@@ -1,42 +1,25 @@
-using LocatorsPracticalTask.Drivers;
+using Core.Base;
 using LocatorsPracticalTask.Pages;
-using OpenQA.Selenium;
 
-namespace LocatorsPracticalTask.Tests
+namespace LocatorsTests
 {
-
     [TestFixture]
-    public class GlobalSearchTests
+    public class GlobalSearchTests : TestBase
     {
-        private IWebDriver? driver;
-
-        [SetUp]
-        public void Setup()
-        {
-            driver = DriverFactory.GetDriver();
-            driver?.Navigate().GoToUrl("https://www.epam.com/");
-        }
-
         [TestCase("BLOCKCHAIN")]
         [TestCase("Cloud")]
         [TestCase("Automation")]
         public void ValidateGlobalSearch(string term)
         {
-            var home = new HomePage(driver);
-            home.AcceptCookies();
-            home.ClickSearchIcon();
+            var home = new HomePage(Driver);
+            var globalSearchPage = new GlobalSearchPage(Driver);
 
-            var search = new GlobalSearchPage(driver);
-            search.Search(term);
+            home.AcceptCookies()
+                .ClickSearchIcon()
+                .Search(term)
+                .ClickFindButton();
 
-            Assert.IsTrue(search.AllResultsContain(term), $"All results should contain: {term}");
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            driver?.Quit();
-            driver?.Dispose();
+            Assert.That(globalSearchPage.AllResultsContain(term), $"All results should contain: {term}", true);
         }
     }
 }
