@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace LocatorsPracticalTask.Pages
+namespace Business.Pages
 {
     public class JobDetailsPage : BasePage
     {

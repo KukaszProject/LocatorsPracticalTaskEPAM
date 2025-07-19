@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace LocatorsPracticalTask.Core.Utilities
+namespace Core.Utilities
 {
     public static class ConfigHelper
     {

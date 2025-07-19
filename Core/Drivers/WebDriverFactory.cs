@@ -1,4 +1,4 @@
-﻿using LocatorsPracticalTask.Core.Utilities;
+﻿using Core.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
