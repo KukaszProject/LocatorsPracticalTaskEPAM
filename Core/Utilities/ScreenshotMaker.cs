@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using log4net;
 
-namespace LocatorsPracticalTask.Core.Utilities
+namespace Core.Utilities
 {
     public static class ScreenshotMaker
     {

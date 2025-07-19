@@ -1,7 +1,7 @@
-﻿using Core.Base;
-using LocatorsPracticalTask.Pages;
+﻿using Tests.Base;
+using Business.Pages;
 
-namespace LocatorsTests
+namespace Tests.TAF
 {
     public class JobSearchTests : TestBase
     {

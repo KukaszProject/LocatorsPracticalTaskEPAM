@@ -1,11 +1,11 @@
 ﻿using OpenQA.Selenium;
 using log4net;
 using log4net.Config;
-using LocatorsPracticalTask.Core.Utilities;
+using Core.Utilities;
 using Core.Drivers;
 using System.Configuration;
 
-namespace Core.Base
+namespace Tests.Base
 {
     public abstract class TestBase
     {

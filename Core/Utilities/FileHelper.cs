@@ -1,6 +1,6 @@
 ﻿using log4net;
 
-namespace LocatorsPracticalTask.Core.Utilities
+namespace Core.Utilities
 {
     public class FileHelper
     {

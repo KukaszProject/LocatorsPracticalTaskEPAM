@@ -1,8 +1,8 @@
-﻿using LocatorsPracticalTask.Core.Utilities;
-using LocatorsPracticalTask.Pages;
-using Core.Base;
+﻿using Core.Utilities;
+using Business.Pages;
+using Tests.Base;
 
-namespace LocatorsTests
+namespace Tests.TAF
 {
     public class DownloadFileTests : TestBase
     {
