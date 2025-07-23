@@ -10,8 +10,10 @@ namespace Business.Pages
         private IWebElement CareersLink => Driver.FindElement(By.LinkText("Careers"));
         private IWebElement AboutLink => Driver.FindElement(By.LinkText("About"));
         private IWebElement InsightsLink => Driver.FindElement(By.LinkText("Insights"));
-        private IWebElement ServicesLink => Driver.FindElement(By.LinkText("Services"));
         private IWebElement SearchIcon => Driver.FindElement(By.ClassName("header-search__button"));
+
+        public IWebElement ServicesLink => Driver.FindElement(By.LinkText("Services"));
+        public IWebElement ArtificialIntelligenceLink => Driver.FindElement(By.CssSelector("a.top-navigation__main-link[href='/services/artificial-intelligence']"));
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
@@ -40,16 +42,6 @@ namespace Business.Pages
             {
                 Log.Warn("Cookie button did not appear or was not clickable in time.");
             }
-            return this;
-        }
-
-        public HomePage OpenServicesNavigationBar()
-        {
-            var parentMenu = Driver.FindElement(By.CssSelector("a.top-navigation__main-link[href='/services/artificial-intelligence']"));
-
-            Actions actions = new Actions(Driver);
-            actions.MoveToElement(ServicesLink).Perform();
-            actions.MoveToElement(parentMenu).Perform();
             return this;
         }
 

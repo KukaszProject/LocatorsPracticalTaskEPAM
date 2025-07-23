@@ -1,16 +1,20 @@
 ﻿using Business.Pages;
+using Core.Drivers;
+using OpenQA.Selenium;
 using Reqnroll;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class InsightsPageSteps
     {
+        private IWebDriver Driver;
         private readonly InsightsPage insightsPage;
 
-        InsightsPageSteps(DriverContext context)
+        public InsightsPageSteps()
         {
-            insightsPage = new InsightsPage(context.Driver);
+            Driver = DriverFactory.GetDriver();
+            insightsPage = new InsightsPage(Driver);
         }
 
         [When(@"I click on the arrow {int} times")]

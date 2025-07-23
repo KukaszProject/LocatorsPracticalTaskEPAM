@@ -1,18 +1,23 @@
 ﻿using Business.Pages;
+using Core.Drivers;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using Reqnroll;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class CareersPageSteps
     {
+        private IWebDriver Driver;
         private readonly CareersPage careersPage;
         private readonly JobDetailsPage jobDetailsPage;
 
-        CareersPageSteps(DriverContext context)
+        public CareersPageSteps()
         {
-            careersPage = new CareersPage(context.Driver);
-            jobDetailsPage = new JobDetailsPage(context.Driver);
+            Driver = DriverFactory.GetDriver();
+            careersPage = new CareersPage(Driver);
+            jobDetailsPage = new JobDetailsPage(Driver);
         }
 
         [When("I select remote work option")]

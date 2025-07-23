@@ -1,18 +1,23 @@
 ﻿using Business.Pages;
+using Core.Drivers;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using Reqnroll;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class ArticleDetailsPageSteps
     {
+        private IWebDriver Driver;
         private readonly ArticleDetailsPage articleDetailsPage;
         private readonly InsightsPage insightsPage;
 
-        ArticleDetailsPageSteps(DriverContext context)
+        public ArticleDetailsPageSteps()
         {
-            articleDetailsPage = new ArticleDetailsPage(context.Driver);
-            insightsPage = new InsightsPage(context.Driver);
+            Driver = DriverFactory.GetDriver();
+            articleDetailsPage = new ArticleDetailsPage(Driver);
+            insightsPage = new InsightsPage(Driver);
         }
 
         [When("I get the current article title")]

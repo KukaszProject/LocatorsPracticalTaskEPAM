@@ -1,16 +1,21 @@
 ﻿using Business.Pages;
+using Core.Drivers;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using Reqnroll;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class ServicesPageSteps
     {
+        private IWebDriver Driver;
         private readonly ServicesPage servicesPage;
 
-        ServicesPageSteps(DriverContext context)
+        public ServicesPageSteps()
         {
-            servicesPage = new ServicesPage(context.Driver);
+            Driver = DriverFactory.GetDriver();
+            servicesPage = new ServicesPage(Driver);
         }
 
         [Then(@"""(.*)"" should contain the expected text")]

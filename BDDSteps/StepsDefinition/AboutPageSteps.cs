@@ -1,18 +1,23 @@
 ﻿using Core.Utilities;
 using Business.Pages;
 using Reqnroll;
+using OpenQA.Selenium;
+using Core.Drivers;
+using NUnit.Framework;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class AboutPageSteps
     {
+        private IWebDriver Driver;
         private readonly AboutPage aboutPage;
-        private  FileHelper fileHelper = new FileHelper();
+        private FileHelper fileHelper = new FileHelper();
 
-        AboutPageSteps(DriverContext context)
+        public AboutPageSteps()
         {
-            aboutPage = new AboutPage(context.Driver);
+            Driver = DriverFactory.GetDriver();
+            aboutPage = new AboutPage(Driver);
         }
 
         [When("I click the download button")]

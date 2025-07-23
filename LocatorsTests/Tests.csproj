@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BDDSteps\BDDSteps.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\LocatorsPracticalTask\Business.csproj" />
   </ItemGroup>
@@ -42,5 +43,9 @@
   <ItemGroup>
     <Folder Include="Features\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<ReqnrollStepAssembly Include="BDDSteps.dll" />
+	</ItemGroup>
 
 </Project>

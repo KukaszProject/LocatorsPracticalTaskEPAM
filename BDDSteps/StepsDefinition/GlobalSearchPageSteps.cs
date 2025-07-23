@@ -1,16 +1,21 @@
 ﻿using Business.Pages;
+using Core.Drivers;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using Reqnroll;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class GlobalSearchPageSteps
     {
+        private IWebDriver Driver;
         private readonly GlobalSearchPage globalSearchPage;
 
-        GlobalSearchPageSteps(DriverContext context)
+        public GlobalSearchPageSteps()
         {
-            globalSearchPage = new GlobalSearchPage(context.Driver);
+            Driver = DriverFactory.GetDriver();
+            globalSearchPage = new GlobalSearchPage(Driver);
         }
 
         [When(@"I enter ""(.*)"" in the search field")]

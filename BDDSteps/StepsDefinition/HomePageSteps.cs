@@ -2,25 +2,28 @@
 using Business.Pages;
 using OpenQA.Selenium;
 using Reqnroll;
+using Core.Drivers;
 
-namespace Tests.Steps
+namespace BDDSteps.StepsDefinition
 {
     [Binding]
     public class HomePageSteps
     {
-        private readonly IWebDriver driver;
+        private IWebDriver Driver;
         private readonly HomePage homePage;
+        private readonly HomePageActions homePageActions;
 
-        HomePageSteps(DriverContext context)
+        public HomePageSteps()
         {
-            driver = context.Driver ?? throw new ArgumentNullException(nameof(context.Driver));
-            homePage = new HomePage(driver);
+            Driver = DriverFactory.GetDriver();
+            homePage = new HomePage(Driver);
+            homePageActions = new HomePageActions(Driver);
         }
 
         [Given(@"I am on the EPAM home page")]
-        public void GivenIAmOnTheHomePage()
+        public void GivenIAmOnTheEPAMHomePage()
         {
-            driver.Navigate().GoToUrl(ConfigHelper.Get("BaseUrl"));
+            Driver.Navigate().GoToUrl(ConfigHelper.Get("BaseUrl"));
             homePage.AcceptCookies();
         }
 
@@ -51,7 +54,7 @@ namespace Tests.Steps
         [Given("I open Services navigation bar")]
         public void GivenIOpenServicesNavigationBar()
         {
-            homePage.OpenServicesNavigationBar();
+            homePageActions.OpenServicesNavigationBar();
         }
 
         [When(@"I click on the ""(.*)"" service category")]

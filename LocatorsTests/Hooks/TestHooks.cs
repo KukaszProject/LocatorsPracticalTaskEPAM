@@ -1,73 +1,78 @@
 ﻿using System.Configuration;
 using Core.Drivers;
 using Core.Utilities;
-using Tests.TAF;
 using log4net;
 using log4net.Config;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Reqnroll;
+//using Tests.GlobalSetup;
 
-[Binding]
-public class TestHooks
+namespace Tests.BDD
 {
-    protected IWebDriver? Driver;
-    protected ILog Log => LogManager.GetLogger(GetType());
 
-    [BeforeTestRun]
-    public static void BeforeTestRun()
+    [Binding]
+    public class TestHooks
     {
-        GlobalSetup.RunBeforeAllTests();
-        var logConfigPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log.config");
+        protected IWebDriver? Driver;
+        protected ILog Log => LogManager.GetLogger(GetType());
 
-        if (!File.Exists(logConfigPath))
+        [BeforeTestRun]
+        public static void BeforeTestRun()
         {
-            throw new FileNotFoundException($"Log.config not found at: {logConfigPath}");
-        }
+            //GlobalSetup.RunBeforeAllTests();
+            var logConfigPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log.config");
 
-        XmlConfigurator.Configure(new FileInfo(logConfigPath));
-    }
-
-    [BeforeScenario]
-    public void BeforeScenario()
-    {
-        Log.Info("---Test setup started.---");
-        Driver = DriverFactory.GetDriver();
-        if (Driver == null)
-        {
-            Log.Error("Driver initialization failed. Driver is null.");
-            throw new InvalidOperationException("Driver initialization failed. Driver is null.");
-        }
-
-        var baseUrl = ConfigHelper.Get("BaseUrl");
-        if (string.IsNullOrEmpty(baseUrl))
-        {
-            Log.Error("BaseUrl configuration is missing or null.");
-            throw new ConfigurationErrorsException("BaseUrl configuration is missing or null.");
-        }
-
-        Driver.Navigate().GoToUrl(baseUrl);
-        Log.Info("---Test setup complete.---");
-    }
-
-    [AfterScenario]
-    public void AfterScenario()
-    {
-        Log.Info("---Test teardown started.---");
-        var outcome = TestContext.CurrentContext.Result.Outcome.Status;
-        if (outcome == NUnit.Framework.Interfaces.TestStatus.Failed)
-        {
-            if (Driver != null)
+            if (!File.Exists(logConfigPath))
             {
-                var screenshotPath = ScreenshotMaker.TakeScreenshot(Driver, TestContext.CurrentContext.Test.Name);
-                Log.Error($"Test failed. Screenshot saved to: {screenshotPath}");
+                throw new FileNotFoundException($"Log.config not found at: {logConfigPath}");
             }
-            else
-            {
-                Log.Error("Driver is null. Unable to take a screenshot.");
-            }
+
+            XmlConfigurator.Configure(new FileInfo(logConfigPath));
         }
 
-        DriverFactory.QuitDriver();
-        Log.Info("---Test teardown complete.---");
+        [BeforeScenario]
+        public void BeforeScenario()
+        {
+            Log.Info("---Test setup started.---");
+            Driver = DriverFactory.GetDriver();
+            if (Driver == null)
+            {
+                Log.Error("Driver initialization failed. Driver is null.");
+                throw new InvalidOperationException("Driver initialization failed. Driver is null.");
+            }
+
+            var baseUrl = ConfigHelper.Get("BaseUrl");
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                Log.Error("BaseUrl configuration is missing or null.");
+                throw new ConfigurationErrorsException("BaseUrl configuration is missing or null.");
+            }
+
+            Driver.Navigate().GoToUrl(baseUrl);
+            Log.Info("---Test setup complete.---");
+        }
+
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            Log.Info("---Test teardown started.---");
+            var outcome = TestContext.CurrentContext.Result.Outcome.Status;
+            if (outcome == NUnit.Framework.Interfaces.TestStatus.Failed)
+            {
+                if (Driver != null)
+                {
+                    var screenshotPath = ScreenshotMaker.TakeScreenshot(Driver, TestContext.CurrentContext.Test.Name);
+                    Log.Error($"Test failed. Screenshot saved to: {screenshotPath}");
+                }
+                else
+                {
+                    Log.Error("Driver is null. Unable to take a screenshot.");
+                }
+            }
+
+            DriverFactory.QuitDriver();
+            Log.Info("---Test teardown complete.---");
+        }
     }
 }

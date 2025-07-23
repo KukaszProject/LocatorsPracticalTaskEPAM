@@ -1,6 +1,6 @@
 ﻿using Core.Utilities;
 
-namespace Tests.TAF
+namespace Tests.GlobalSetup
 {
     [SetUpFixture]
     public class GlobalSetup
