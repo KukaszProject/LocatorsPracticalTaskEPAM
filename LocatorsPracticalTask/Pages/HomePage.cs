@@ -1,7 +1,9 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
-namespace LocatorsPracticalTask.Pages
+namespace Business.Pages
 {
     public class HomePage : BasePage
     {
@@ -9,6 +11,9 @@ namespace LocatorsPracticalTask.Pages
         private IWebElement AboutLink => Driver.FindElement(By.LinkText("About"));
         private IWebElement InsightsLink => Driver.FindElement(By.LinkText("Insights"));
         private IWebElement SearchIcon => Driver.FindElement(By.ClassName("header-search__button"));
+
+        public IWebElement ServicesLink => Driver.FindElement(By.LinkText("Services"));
+        public IWebElement ArtificialIntelligenceLink => Driver.FindElement(By.CssSelector("a.top-navigation__main-link[href='/services/artificial-intelligence']"));
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
@@ -37,6 +42,20 @@ namespace LocatorsPracticalTask.Pages
             {
                 Log.Warn("Cookie button did not appear or was not clickable in time.");
             }
+            return this;
+        }
+
+        public HomePage NavigateToCategory(string serviceName)
+        {
+
+            var serviceNameFormatted = string.Join("-", serviceName
+                .ToLower().Split([' '], StringSplitOptions.RemoveEmptyEntries));
+
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            var subMenu = wait.Until(ExpectedConditions.ElementToBeClickable(
+                By.CssSelector($"a.top-navigation__sub-link[href='/services/artificial-intelligence/{serviceNameFormatted}']")));
+
+            subMenu.Click();
             return this;
         }
 
