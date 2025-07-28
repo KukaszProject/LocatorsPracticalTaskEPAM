@@ -25,6 +25,7 @@
     <PackageReference Include="Reqnroll" Version="2.4.1" />
     <PackageReference Include="Reqnroll.NUnit" Version="2.4.1" />
     <PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="2.4.1" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.33.0" />
   </ItemGroup>
 
