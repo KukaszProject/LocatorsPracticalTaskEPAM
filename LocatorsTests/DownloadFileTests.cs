@@ -18,7 +18,7 @@ namespace Tests.TAF
 
             Assert.That(fileHelper
                 .WaitForFileDownload(Path.Combine(Directory.GetCurrentDirectory(),
-                "Downloads"), fileName, 10), "File was not downloaded successfully.", true);
+                "Downloads"), fileName, 10), "File was not downloaded successfully.");
         }
     }
 }

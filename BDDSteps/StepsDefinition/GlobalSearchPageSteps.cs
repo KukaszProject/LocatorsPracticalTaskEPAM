@@ -33,7 +33,7 @@ namespace BDDSteps.StepsDefinition
         [Then("I should see search results related to \"(.*)\"")]
         public void ThenIShouldSeeSearchResultsRelatedToKeyword(string keyword)
         {
-            Assert.That(globalSearchPage.AllResultsContain(keyword), $"All results should contain: {keyword}", true);
+            Assert.That(globalSearchPage.AllResultsContain(keyword), $"All results should contain: {keyword}");
         }
     }
 }

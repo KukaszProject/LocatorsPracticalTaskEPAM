@@ -31,7 +31,7 @@ namespace BDDSteps.StepsDefinition
         {
             Assert.That(fileHelper
                     .WaitForFileDownload(Path.Combine(Directory.GetCurrentDirectory(),
-                    "Downloads"), "EPAM_Corporate_Overview*.pdf", 10), "File was not downloaded successfully.", true);
+                    "Downloads"), "EPAM_Corporate_Overview*.pdf", 10), "File was not downloaded successfully.");
         }
     }
 }

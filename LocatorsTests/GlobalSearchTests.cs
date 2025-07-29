@@ -19,7 +19,7 @@ namespace Tests.TAF
                 .Search(term)
                 .ClickFindButton();
 
-            Assert.That(globalSearchPage.AllResultsContain(term), $"All results should contain: {term}", true);
+            Assert.That(globalSearchPage.AllResultsContain(term), $"All results should contain: {term}");
         }
     }
 }
