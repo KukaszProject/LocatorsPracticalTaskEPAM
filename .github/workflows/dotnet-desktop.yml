@@ -34,6 +34,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore AutomatedTestingPracticalTaskEPAM.sln
 
+      - name: Build the solution
+        run: dotnet build AutomatedTestingPracticalTaskEPAM.sln --configuration Debug
+
       - name: Run API Tests
         run: |
           dotnet test ./LocatorsTests/Tests.csproj --filter "Category=APITests" --logger "trx;LogFileName=ApiTests.trx" --no-restore --no-build
@@ -61,6 +64,9 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore AutomatedTestingPracticalTaskEPAM.sln
+
+      - name: Build the solution
+        run: dotnet build AutomatedTestingPracticalTaskEPAM.sln --configuration Debug
 
       - name: Run UI Tests
         run: |
