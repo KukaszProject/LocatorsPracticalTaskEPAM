@@ -1,7 +1,7 @@
-using Core.Base;
-using LocatorsPracticalTask.Pages;
+using Tests.Base;
+using Business.Pages;
 
-namespace LocatorsTests
+namespace Tests.UITests
 {
     [TestFixture]
     public class GlobalSearchTests : TestBase
@@ -19,7 +19,7 @@ namespace LocatorsTests
                 .Search(term)
                 .ClickFindButton();
 
-            Assert.That(globalSearchPage.AllResultsContain(term), $"All results should contain: {term}", true);
+            Assert.That(globalSearchPage.AllResultsContain(term), $"All results should contain: {term}");
         }
     }
 }

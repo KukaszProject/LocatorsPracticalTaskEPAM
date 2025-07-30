@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
-namespace LocatorsPracticalTask.Pages
+namespace Business.Pages
 {
     public class InsightsPage : BasePage
     {

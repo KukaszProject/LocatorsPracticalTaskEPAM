@@ -1,7 +1,7 @@
-﻿using Core.Base;
-using LocatorsPracticalTask.Pages;
+﻿using Tests.Base;
+using Business.Pages;
 
-namespace LocatorsTests
+namespace Tests.UITests
 {
     public class JobSearchTests : TestBase
     {
@@ -22,7 +22,7 @@ namespace LocatorsTests
                 .OpenLastJob()
                 .ContainsKeyword(keyword);
 
-            Assert.IsTrue(isContainsKeyword, $"Job page should contain keyword: {keyword}");
+            Assert.That(isContainsKeyword, $"Job page should contain keyword: {keyword}");
         }
     }
 }

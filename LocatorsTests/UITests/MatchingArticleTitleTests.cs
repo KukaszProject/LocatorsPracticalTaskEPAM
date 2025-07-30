@@ -1,7 +1,7 @@
-﻿using Core.Base;
-using LocatorsPracticalTask.Pages;
+﻿using Tests.Base;
+using Business.Pages;
 
-namespace LocatorsTests
+namespace Tests.UITests
 {
     public class MatchingArticleTitleTests : TestBase
     {
@@ -19,7 +19,7 @@ namespace LocatorsTests
                 .GetCurrentArticleTitle();
 
             Assert.That(articleDetailsPage.IsArticleTitleMatching(insightsPage.GetTitleOnCarousel()),
-                "The article title does not match the expected title from the carousel.", true);
+                "The article title does not match the expected title from the carousel.");
         }
     }
 }

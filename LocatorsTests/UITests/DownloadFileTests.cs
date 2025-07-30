@@ -1,8 +1,8 @@
-﻿using LocatorsPracticalTask.Core.Utilities;
-using LocatorsPracticalTask.Pages;
-using Core.Base;
+﻿using Core.Utilities;
+using Business.Pages;
+using Tests.Base;
 
-namespace LocatorsTests
+namespace Tests.UITests
 {
     public class DownloadFileTests : TestBase
     {
@@ -18,7 +18,7 @@ namespace LocatorsTests
 
             Assert.That(fileHelper
                 .WaitForFileDownload(Path.Combine(Directory.GetCurrentDirectory(),
-                "Downloads"), fileName, 10), "File was not downloaded successfully.", true);
+                "Downloads"), fileName, 10), "File was not downloaded successfully.");
         }
     }
 }
