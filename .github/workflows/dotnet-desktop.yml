@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: API-Test-Logs
-          path: '**/Logs'
+          path: ./LocatorsTests/bin/Debug/net8.0/Logs
 
   ui-tests:
     name: Run UI Tests
@@ -70,11 +70,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: UI-Test-Logs
-          path: '**/Logs'
+          path: ./LocatorsTests/bin/Debug/net8.0/Logs
 
       - name: Upload Screenshots (if any)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: UI-Screenshots
-          path: '**/Screenshots'
+          path: ./LocatorsTests/bin/Debug/net8.0/Screenshots
