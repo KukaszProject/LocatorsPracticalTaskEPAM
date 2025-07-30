@@ -6,7 +6,7 @@ namespace Tests.GlobalSetup
     public class GlobalSetup
     {
         [OneTimeSetUp]
-        public static void RunBeforeAllTests()
+        public static void BeforeAllTests()
         {
             TestEnvironmentSetup.RunBeforeAllTests();
         }
