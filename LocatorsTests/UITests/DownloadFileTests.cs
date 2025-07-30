@@ -2,7 +2,7 @@
 using Business.Pages;
 using Tests.Base;
 
-namespace Tests.TAF
+namespace Tests.UITests
 {
     public class DownloadFileTests : TestBase
     {

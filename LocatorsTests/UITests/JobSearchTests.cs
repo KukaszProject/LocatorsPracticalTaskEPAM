@@ -1,7 +1,7 @@
 ﻿using Tests.Base;
 using Business.Pages;
 
-namespace Tests.TAF
+namespace Tests.UITests
 {
     public class JobSearchTests : TestBase
     {
