@@ -32,7 +32,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore **/MyTests.csproj
+        run: dotnet restore **/Tests.csproj
 
       - name: Run API Tests
         run: |
