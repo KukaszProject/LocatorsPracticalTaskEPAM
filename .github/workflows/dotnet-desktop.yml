@@ -64,12 +64,7 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore AutomatedTestingPracticalTaskEPAM.sln
-
-      - name: Inject selected browser into .runsettings
-        run: |
-          $browser = "${{ github.event.inputs.browser }}"
-          (Get-Content .runsettings) -replace '<Parameter name="Browser" value=".*?"\s*/>', "<Parameter name=`"Browser`" value=`"$browser`"/> " | Set-Content .runsettings
-
+        
       - name: Build the solution
         run: dotnet build AutomatedTestingPracticalTaskEPAM.sln --configuration Debug
 
