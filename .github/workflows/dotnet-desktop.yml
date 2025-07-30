@@ -32,7 +32,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore Tests.csproj
+        run: dotnet restore AutomatedTestingPracticalTaskEPAM.sln
 
       - name: Run API Tests
         run: |
@@ -60,7 +60,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore Tests.csproj
+        run: dotnet restore AutomatedTestingPracticalTaskEPAM.sln
 
       - name: Run UI Tests
         run: |
