@@ -22,14 +22,14 @@ namespace BDDSteps.StepsDefinition
         public void ThenShouldContainTheExpectedText(string category)
         {
             Assert.That(servicesPage.IsTitleMatchingCategory(category),
-                "The article title does not match the expected title from the carousel.", true);
+                "The article title does not match the expected title from the carousel.");
         }
 
         [Then("Our Related Expertise should be displayed")]
         public void ThenOurRelatedExpertiseShouldBeDisplayed()
         {
             Assert.That(servicesPage.IsRelatedExpertiseSectionVisible(),
-                "The 'Our Related Expertise' section is not visible.", true);
+                "The 'Our Related Expertise' section is not visible.");
         }
     }
 }

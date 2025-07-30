@@ -59,7 +59,7 @@ namespace BDDSteps.StepsDefinition
         [Then(@"I should see job listings related to ""(.*)""")]
         public void ThenIShouldSeeJobListingsRelatedTo(string keyword)
         {
-            Assert.IsTrue(jobDetailsPage.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
+            Assert.That(jobDetailsPage.ContainsKeyword(keyword), $"Job page should contain keyword: {keyword}");
         }
     }
 }

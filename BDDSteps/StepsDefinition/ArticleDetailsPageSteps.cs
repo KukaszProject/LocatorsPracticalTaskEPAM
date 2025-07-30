@@ -30,7 +30,7 @@ namespace BDDSteps.StepsDefinition
         public void ThenTheArticleTitleShouldMatchTheExpectedTitle()
         {
             Assert.That(articleDetailsPage.IsArticleTitleMatching(insightsPage.GetTitleOnCarousel()),
-                "The article title does not match the expected title from the carousel.", true);
+                "The article title does not match the expected title from the carousel.");
         }
     }
 }
