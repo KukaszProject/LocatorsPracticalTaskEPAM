@@ -6,6 +6,7 @@ namespace Tests.UITests
     public class MatchingArticleTitleTests : TestBase
     {
         [Test]
+        [Category("UITests")]
         public void ValidateMatchingTitle()
         {
             var home = new HomePage(Driver);

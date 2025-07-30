@@ -3,6 +3,7 @@ using Core.Drivers;
 using Core.Utilities;
 using log4net;
 using log4net.Config;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Reqnroll;
 

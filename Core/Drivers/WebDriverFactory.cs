@@ -1,4 +1,5 @@
 ﻿using Core.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -14,7 +15,9 @@ namespace Core.Drivers
         {
             if (driver != null) return driver;
 
-            var browser = ConfigHelper.Get("Browser").ToLower();
+            var browser = TestContext.Parameters["browser"]
+                   ?? ConfigHelper.Get("Browser").ToLower()
+                   ?? "chrome";
             string downloadPath = Path.Combine(Directory.GetCurrentDirectory(), ConfigHelper.Get("DownloadFolder"));
 
             Directory.CreateDirectory(downloadPath);
