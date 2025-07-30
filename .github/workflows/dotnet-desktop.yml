@@ -36,17 +36,14 @@ jobs:
 
       - name: Run API Tests
         run: |
-          dotnet test ./LocatorsTests/Tests.csproj \
-          --filter "Category=APITests" \
-          --logger "trx;LogFileName=ApiTests.trx" \
-          --no-restore --no-build
+          dotnet test ./LocatorsTests/Tests.csproj --filter "Category=APITests" --logger "trx;LogFileName=ApiTests.trx" --no-restore --no-build
         continue-on-error: true
 
       - name: Upload API Test Results
         uses: actions/upload-artifact@v4
         with:
-          name: API-Test-Results
-          path: '**/TestResults/'
+          name: API-Test-Logs
+          path: ./Logs
 
   ui-tests:
     name: Run UI Tests
@@ -67,21 +64,17 @@ jobs:
 
       - name: Run UI Tests
         run: |
-          dotnet test ./LocatorsTests/Tests.csproj \
-          --filter "Category=UITests" \
-          --logger "trx;LogFileName=ApiTests.trx" \
-          --no-restore --no-build
-            -- TestRunParameters.Parameter(name="browser",value="${{ github.event.inputs.browser }}")
+          dotnet test ./LocatorsTests/Tests.csproj --filter "Category=UITests" --logger "trx;LogFileName=ApiTests.trx" --no-restore --no-build -- TestRunParameters.Parameter(name="browser",value="${{ github.event.inputs.browser }}")
 
       - name: Upload UI Test Results
         uses: actions/upload-artifact@v4
         with:
-          name: UI-Test-Results
-          path: '**/TestResults/'
+          name: UI-Test-Logs
+          path: ./Logs
 
       - name: Upload Screenshots (if any)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: UI-Screenshots
-          path: '**/Screenshots'
+          path: ./Screenshots
