@@ -36,7 +36,10 @@ jobs:
 
       - name: Run API Tests
         run: |
-          dotnet test **/Tests.csproj --filter Category=APITests --logger "trx;LogFileName=ApiTests.trx"
+          dotnet test ./LocatorsTests/Tests.csproj \
+          --filter "Category=APITests" \
+          --logger "trx;LogFileName=ApiTests.trx" \
+          --no-restore --no-build
         continue-on-error: true
 
       - name: Upload API Test Results
@@ -64,9 +67,10 @@ jobs:
 
       - name: Run UI Tests
         run: |
-          dotnet test MyTests/MyTests.csproj ^
-            --filter Category=UITests ^
-            --logger "trx;LogFileName=UiTests.trx" ^
+          dotnet test ./LocatorsTests/Tests.csproj \
+          --filter "Category=UITests" \
+          --logger "trx;LogFileName=ApiTests.trx" \
+          --no-restore --no-build
             -- TestRunParameters.Parameter(name="browser",value="${{ github.event.inputs.browser }}")
 
       - name: Upload UI Test Results
