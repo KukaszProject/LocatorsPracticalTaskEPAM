@@ -6,20 +6,9 @@ namespace Tests.GlobalSetup
     public class GlobalSetup
     {
         [OneTimeSetUp]
-        public static void RunBeforeAllTests()
+        public static void BeforeAllTests()
         {
-            CleanFolder(ConfigHelper.Get("DownloadFolder"));
-            CleanFolder(ConfigHelper.Get("ScreenshotsFolder"));
-            CleanFolder(ConfigHelper.Get("LogsFolder"));
-        }
-
-        private static void CleanFolder(string folderName)
-        {
-            var folderPath = Path.Combine(TestContext.CurrentContext.WorkDirectory, folderName);
-            if (Directory.Exists(folderPath))
-            {
-                Directory.Delete(folderPath, true);
-            }
+            TestEnvironmentSetup.RunBeforeAllTests();
         }
     }
 }

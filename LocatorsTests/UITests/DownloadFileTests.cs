@@ -2,7 +2,7 @@
 using Business.Pages;
 using Tests.Base;
 
-namespace Tests.TAF
+namespace Tests.UITests
 {
     public class DownloadFileTests : TestBase
     {
@@ -18,7 +18,7 @@ namespace Tests.TAF
 
             Assert.That(fileHelper
                 .WaitForFileDownload(Path.Combine(Directory.GetCurrentDirectory(),
-                "Downloads"), fileName, 10), "File was not downloaded successfully.", true);
+                "Downloads"), fileName, 10), "File was not downloaded successfully.");
         }
     }
 }

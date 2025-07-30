@@ -1,7 +1,7 @@
 ﻿using Tests.Base;
 using Business.Pages;
 
-namespace Tests.TAF
+namespace Tests.UITests
 {
     public class JobSearchTests : TestBase
     {
@@ -22,7 +22,7 @@ namespace Tests.TAF
                 .OpenLastJob()
                 .ContainsKeyword(keyword);
 
-            Assert.IsTrue(isContainsKeyword, $"Job page should contain keyword: {keyword}");
+            Assert.That(isContainsKeyword, $"Job page should contain keyword: {keyword}");
         }
     }
 }

@@ -6,7 +6,6 @@ using log4net.Config;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Reqnroll;
-//using Tests.GlobalSetup;
 
 namespace Tests.BDD
 {
@@ -20,7 +19,7 @@ namespace Tests.BDD
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            //GlobalSetup.RunBeforeAllTests();
+            TestEnvironmentSetup.RunBeforeAllTests();
             var logConfigPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log.config");
 
             if (!File.Exists(logConfigPath))
